@@ -1,4 +1,4 @@
-package PatternSearchingAlgorithms;
+package ADI.PatternSearchingAlgorithms;
 
 import java.util.Arrays;
 
