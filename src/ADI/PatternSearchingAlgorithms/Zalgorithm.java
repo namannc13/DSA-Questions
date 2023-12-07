@@ -13,6 +13,7 @@ public class Zalgorithm {
         
         System.out.print(Arrays.toString(z));
     }
+    
     public static int[] calculatez(char[] ans){
         int[] z = new int[ans.length];
         
