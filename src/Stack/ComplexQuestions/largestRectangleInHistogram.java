@@ -1,4 +1,4 @@
-package Stack.NotEasyQuestions;
+package Stack.ComplexQuestions;
 
 import java.util.Scanner;
 import java.util.Stack;
