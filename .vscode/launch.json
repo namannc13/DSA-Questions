@@ -1,0 +1,56 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "HeapMain",
+            "request": "launch",
+            "mainClass": "ADI.Heap.Implementation.HeapMain",
+            "projectName": "DSA Questions_f015c87"
+        },
+        {
+            "type": "java",
+            "name": "KMPalgorithm",
+            "request": "launch",
+            "mainClass": "ADI.PatternSearchingAlgorithms.KMPalgorithm",
+            "projectName": "DSA Questions_f015c87"
+        },
+        {
+            "type": "java",
+            "name": "Zalgorithm",
+            "request": "launch",
+            "mainClass": "ADI.PatternSearchingAlgorithms.Zalgorithm",
+            "projectName": "DSA Questions_f015c87"
+        },
+        {
+            "type": "java",
+            "name": "largestRectangleInHistogram",
+            "request": "launch",
+            "mainClass": "Stack.ComplexQuestions.largestRectangleInHistogram",
+            "projectName": "DSA Questions_f015c87"
+        },
+        {
+            "type": "java",
+            "name": "StackMain",
+            "request": "launch",
+            "mainClass": "Stack.Implementation.StackMain",
+            "projectName": "DSA Questions_f015c87"
+        },
+        {
+            "type": "java",
+            "name": "nextSmaller",
+            "request": "launch",
+            "mainClass": "Stack.Questions.nextSmaller",
+            "projectName": "DSA Questions_f015c87"
+        }
+    ]
+}
