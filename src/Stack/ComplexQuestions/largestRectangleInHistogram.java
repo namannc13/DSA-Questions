@@ -40,7 +40,7 @@ public class largestRectangleInHistogram {
         return area;
     }
 
-    private static int[] nextSmaller(int[] arr, int size) {
+    private static int[] nextSmaller(int[] arr, int size) { //returns an array of elements which tells what is the next smaller element after that index
         Stack<Integer> st = new Stack<>();
         st.push(-1);
 
@@ -57,7 +57,7 @@ public class largestRectangleInHistogram {
         return ans;
     }
 
-    private static int[] previousSmaller(int[] arr, int size) {
+    private static int[] previousSmaller(int[] arr, int size) { //returns an array of elements which tells what is the previous smaller element before that index
         Stack<Integer> st = new Stack<>();
         st.push(-1);
 
