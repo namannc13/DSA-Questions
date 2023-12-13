@@ -3,7 +3,7 @@ package Stack.Questions;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class nextSmaller {
+public class nextGreater {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
     
@@ -14,7 +14,7 @@ public class nextSmaller {
             arr[i] = sc.nextInt();
         }
 
-        int ans[] = nextSmallerArray(arr, size);
+        int ans[] = nextGreaterArray(arr, size);
 
         for (int i = 0; i < size; i++) {
             System.out.print(ans[i] + " ");
@@ -23,24 +23,21 @@ public class nextSmaller {
         sc.close();
     }
 
-    private static int[] nextSmallerArray(int[] arr, int size) {
+    private static int[] nextGreaterArray(int[] arr, int size) {
         Stack<Integer> st = new Stack<>();
-        st.push(-1);
+        st.push(Integer.MAX_VALUE);
 
         int[] ans = new int[size];
 
         for(int i = size-1; i >= 0; i --){
             int curr = arr[i];
-            while(st.peek() >= curr){
+            while(st.peek() != Integer.MAX_VALUE && arr[st.peek()] <= curr){
                 st.pop();
             }
-            ans[i] = st.peek();
-            st.push(curr);
+            ans[i] = (st.peek() == Integer.MAX_VALUE)? 0: st.peek() - i;
+            st.push(i);
         }
 
         return ans;
     }
-
-
 }
-
