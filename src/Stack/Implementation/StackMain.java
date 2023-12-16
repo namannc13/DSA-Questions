@@ -1,8 +1,6 @@
 package Stack.Implementation;
 
 import Stack.Implementation.ImplementationQuestions.MinStack;
-import Stack.Implementation.usingArray.customStack;
-import Stack.Implementation.usingArray.dynamicStack;
 
 public class StackMain {
     public static void main(String[] args) throws Exception {
