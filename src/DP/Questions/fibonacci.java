@@ -1,4 +1,4 @@
-package DP;
+package DP.Questions;
 
 public class fibonacci{
     public static int fibonacciNumberRecursion(int n){ // Using Recursion 
