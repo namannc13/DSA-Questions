@@ -70,20 +70,20 @@ public class subsetSumEqualsToTarget {
         return answer;
     }
 
-    private static boolean subsetSumEqualsToTargetTabulation(int[] arr,int target, boolean[][] dpBoolean){
+    static boolean subsetSumEqualsToTargetTabulation(int[] arr,int target, boolean[][] dpBoolean){
         //if target is 0, return true ( the recursion base case ), so what can the index possibly be ? when the target is 0? it can be anything from 0 to arr.lenght-1. so just do it , write it in the dp array
-        for(int i = 0; i< arr.length-1; i++){
+        for(int i = 0; i< arr.length; i++){
             dpBoolean[i][0] = true;
         }
         // if index is 0, if arr[index] is equal to the target then return true;
-        // when index is 0, target can be anything from 1,2,3,4.... target ( not 0 because the first base case covers it) // target can be anything but it will be true only for arr[0] 
-        dpBoolean[0][arr[0]] = true;
+        // when index is 0, target can be anything from 1,2,3,4.... target ( not 0 because the first base case covers it) // target can be anything but it will be true only for arr[0]
+        if(arr[0] <= target) dpBoolean[0][arr[0]] = true; // (arr[0] <= target) for cases when the arr is {100} .and we sent the target as half the sum plus 1 (50 + 1)
 
         for(int i = 1; i< arr.length; i++){ // for index
             for(int j = 1; j <= target; j++){ // for target
                 boolean notPick = dpBoolean[i-1][j];
                 boolean Pick = false; 
-                if(target >= arr[i]){ 
+                if(j >= arr[i]){ 
                     Pick = dpBoolean[i-1][j - arr[i]];
                 }
                 dpBoolean[i][j] = notPick || Pick;
