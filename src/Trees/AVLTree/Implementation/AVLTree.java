@@ -73,11 +73,7 @@ public class AVLTree {
             node.right = ReturnInsert(node.right, value);
         }
     
-        node.height = Math.max(height(node.left), height(node.right)) + 1; // while inserting value/node/elements, we
-                                                                           // are also assigning the respective height
-                                                                           // to the nodes on our way back! ( after
-                                                                           // inserting an element, the height
-                                                                           // increments for nodes , that's why a +1 )
+        node.height = Math.max(height(node.left), height(node.right)) + 1; // while inserting value/node/elements, we// are also assigning the respective height// to the nodes on our way back! ( after// inserting an element, the height// increments for nodes , that's why a +1 )
     
         return ReturnRotate(node); // before returning the node, we need to check whether this node is balanced or unbalanced ( AVL Trees ) // Like earlier, we are still returning this node only ( it's just in an extra function )
     }

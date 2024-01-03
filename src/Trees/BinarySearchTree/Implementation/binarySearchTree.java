@@ -13,7 +13,7 @@ public class binarySearchTree {
             this.value = value;
         }
 
-        public int getValue() {
+        public int getValue() { // because we have set the 'value' to private
             return value;
         }
     }
@@ -28,9 +28,7 @@ public class binarySearchTree {
         return height(root);
     }
 
-    public int height(Node node) { // this method returns the height of the tree as the node passed here will be
-                                   // the root node and the height of the root node is the height is the height of
-                                   // the tree
+    public int height(Node node) { // this method returns the height of the tree as the node passed here will be// the root node and the height of the root node is the height is the height of// the tree
         if (node == null) { // if no tree exists, return -1
             return -1;
         }
@@ -57,9 +55,7 @@ public class binarySearchTree {
 
     }
 
-    public void VoidInsert(int value) { // takes a value, if the root node is null, it makes a node and assing the root
-                                        // node to it, else it calls the VoidInsert helper function according to the
-                                        // condition
+    public void VoidInsert(int value) { // takes a value, if the root node is null, it makes a node and assing the root// node to it, else it calls the VoidInsert helper function according to the// condition
         if (root == null) {
             Node newNode = new Node(value);
             root = newNode;
@@ -70,23 +66,11 @@ public class binarySearchTree {
             } else {
                 VoidInsert(root.right, value, root, "right");
             }
-            root.height = Math.max(height(root.left), height(root.right)) + 1; // after inserting an element, we are
-                                                                               // assigning the new height to the root
-                                                                               // node
+            root.height = Math.max(height(root.left), height(root.right)) + 1; // after inserting an element, we are// assigning the new height to the root// node
         }
     }
 
-    private void VoidInsert(Node node, int value, Node prevNode, String way) { // In VoidInsert, when we reach the spot
-                                                                               // where we want to add the new value, it
-                                                                               // is a null spot.In function calls, we
-                                                                               // are keeping track of the previous node
-                                                                               // so when we reach that null spot, we
-                                                                               // make the previousNode.'way' ( we are
-                                                                               // keeping track of the way (left or
-                                                                               // right) as well ) equals to the ( Node
-                                                                               // which we create at that moment only )
-                                                                               // and then return!! This is the Void way
-                                                                               // of inserting .
+    private void VoidInsert(Node node, int value, Node prevNode, String way) { // In VoidInsert, when we reach the spot// where we want to add the new value, it// is a null spot.In function calls, we// are keeping track of the previous node// so when we reach that null spot, we// make the previousNode.'way' ( we are// keeping track of the way (left or// right) as well ) equals to the ( Node// which we create at that moment only )// and then return!! This is the Void way// of inserting .
         if (node == null) {
             if (way.equals("left")) {
                 Node newNode = new Node(value);
@@ -105,11 +89,7 @@ public class binarySearchTree {
             VoidInsert(node.right, value, node, "right");
         }
 
-        node.height = Math.max(height(node.left), height(node.right)) + 1; // while inserting value/node/elements, we
-                                                                           // are also assigning the respective height
-                                                                           // to the nodes on our way back! ( after
-                                                                           // inserting an element, the height
-                                                                           // increments for nodes , that's why a +1 )
+        node.height = Math.max(height(node.left), height(node.right)) + 1; // while inserting value/node/elements, we// are also assigning the respective height// to the nodes on our way back! ( after// inserting an element, the height// increments for nodes , that's why a +1 )
     }
 
     public void ReturnInsert(int value) {
@@ -128,11 +108,7 @@ public class binarySearchTree {
             node.right = ReturnInsert(node.right, value);
         }
 
-        node.height = Math.max(height(node.left), height(node.right)) + 1; // while inserting value/node/elements, we
-                                                                           // are also assigning the respective height
-                                                                           // to the nodes on our way back! ( after
-                                                                           // inserting an element, the height
-                                                                           // increments for nodes , that's why a +1 )
+        node.height = Math.max(height(node.left), height(node.right)) + 1; // while inserting value/node/elements, we// are also assigning the respective height// to the nodes on our way back! ( after// inserting an element, the height// increments for nodes , that's why a +1 )
 
         return node;
     }
@@ -171,29 +147,7 @@ public class binarySearchTree {
             return true;
         }
 
-        return Math.abs(height(node.left) - height(node.right)) <= 1 && balanced(node.left) && balanced(node.right); // Math.abs
-                                                                                                                     // method
-                                                                                                                     // returns
-                                                                                                                     // the
-                                                                                                                     // absolute
-                                                                                                                     // value
-                                                                                                                     // of
-                                                                                                                     // a
-                                                                                                                     // number,
-                                                                                                                     // making
-                                                                                                                     // it
-                                                                                                                     // non-negative.
-                                                                                                                     // If
-                                                                                                                     // the
-                                                                                                                     // argument
-                                                                                                                     // is
-                                                                                                                     // already
-                                                                                                                     // non-negative,
-                                                                                                                     // it
-                                                                                                                     // returns
-                                                                                                                     // the
-                                                                                                                     // argument
-                                                                                                                     // itself.
+        return Math.abs(height(node.left) - height(node.right)) <= 1 && balanced(node.left) && balanced(node.right); // Math.abs// method// returns// the// absolute// value// of// a// number,// making// it// non-negative.// If// the// argument// is// already// non-negative,// it// returns// the// argument// itself.
     }
 
     public void populate(int[] nums) { // // using the ReturnInsert method internally for now
@@ -202,11 +156,7 @@ public class binarySearchTree {
         }
     }
 
-    public void populateSorted(int[] nums) { // if an array is sorted and we try to populate it using the default
-                                             // method, then it will make the tree a Skewed Tree which we don't want so
-                                             // we are using this method where we find the mid element and then insert
-                                             // it, thereafter we insert the left part and the right part using
-                                             // recursion
+    public void populateSorted(int[] nums) { // if an array is sorted and we try to populate it using the default// method, then it will make the tree a Skewed Tree which we don't want so// we are using this method where we find the mid element and then insert// it, thereafter we insert the left part and the right part using// recursion
         populateSorted(nums, nums.length);
     }
 

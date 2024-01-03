@@ -3,24 +3,32 @@ package DP.Questions.Subset_Subsequence;
 import java.util.Arrays;
 
 public class countOfSubsetsWithSumK {
-    public static void main(String[] args) {
-        int[] arr = {1,1,1};
-        int target = 2;
+    public static void main(String[] args) { // this will not solve for array if it is 0 as elements
+        int[] arr = {0,0,1};
+        int target = 1;
 
-        System.out.println(countOfSubsetsWithSumKRecursion(arr, arr.length-1, target));
+        System.out.println(countOfSubsetsWithSumKRecursion(arr, arr.length-1, target)); // if no zero
+        // if there are 0's in array // count the number of 0's
+        int countZero = 0;
+        for(int i = 0; i < arr.length; i++){
+            if(arr[i] == 0) countZero++;
+        }
+        System.out.println(Math.pow(2, countZero) * countOfSubsetsWithSumKRecursion(arr, arr.length-1, target)); // if zero
 
         int[][] dp = new int[arr.length][target+1];
         for(int i =0; i < dp.length; i++){
             Arrays.fill(dp[i], -1);
         }
 
-        System.out.println(countOfSubsetsWithSumKRecursionDP(arr, arr.length-1, target, dp));
+        System.out.println(countOfSubsetsWithSumKRecursionDP(arr, arr.length-1, target, dp)); // if no zero
+        System.out.println(Math.pow(2, countZero) * countOfSubsetsWithSumKRecursionDP(arr, arr.length-1, target, dp)); // if zero
 
         for(int i =0; i < dp.length; i++){
             Arrays.fill(dp[i], 0);
         }
 
-        System.out.println(countOfSubsetsWithSumKTabulation(arr, target, dp));
+        System.out.println(countOfSubsetsWithSumKTabulation(arr, target, dp)); // if no zero
+        System.out.println(Math.pow(2, countZero) * countOfSubsetsWithSumKTabulation(arr, target, dp)); // if zero
 
         for(int i =0; i < dp.length; i++){
             System.out.println(Arrays.toString(dp[i])); 
