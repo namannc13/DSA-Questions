@@ -1,8 +1,11 @@
 package Trees.BinarySearchTree.Implementation;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class binarySearchTree {
+    // Node class
     public class Node {
         private int value;
         private int height;
@@ -27,7 +30,6 @@ public class binarySearchTree {
     public int height(){
         return height(root);
     }
-
     public int height(Node node) { // this method returns the height of the tree as the node passed here will be// the root node and the height of the root node is the height is the height of// the tree
         if (node == null) { // if no tree exists, return -1
             return -1;
@@ -42,7 +44,6 @@ public class binarySearchTree {
     public void display() {
         display(root, "Root Node : ");
     }
-
     private void display(Node node, String details) {
         if (node == null) {
             return;
@@ -55,6 +56,7 @@ public class binarySearchTree {
 
     }
 
+    // Insert in a tree
     public void VoidInsert(int value) { // takes a value, if the root node is null, it makes a node and assing the root// node to it, else it calls the VoidInsert helper function according to the// condition
         if (root == null) {
             Node newNode = new Node(value);
@@ -69,7 +71,6 @@ public class binarySearchTree {
             root.height = Math.max(height(root.left), height(root.right)) + 1; // after inserting an element, we are// assigning the new height to the root// node
         }
     }
-
     private void VoidInsert(Node node, int value, Node prevNode, String way) { // In VoidInsert, when we reach the spot// where we want to add the new value, it// is a null spot.In function calls, we// are keeping track of the previous node// so when we reach that null spot, we// make the previousNode.'way' ( we are// keeping track of the way (left or// right) as well ) equals to the ( Node// which we create at that moment only )// and then return!! This is the Void way// of inserting .
         if (node == null) {
             if (way.equals("left")) {
@@ -92,10 +93,10 @@ public class binarySearchTree {
         node.height = Math.max(height(node.left), height(node.right)) + 1; // while inserting value/node/elements, we// are also assigning the respective height// to the nodes on our way back! ( after// inserting an element, the height// increments for nodes , that's why a +1 )
     }
 
+    // Insert in a tree
     public void ReturnInsert(int value) {
         root = ReturnInsert(root, value);
     }
-
     private Node ReturnInsert(Node node, int value) {
         if (node == null) {
             Node newNode = new Node(value);
@@ -116,7 +117,6 @@ public class binarySearchTree {
     public void prettyDisplay() {
         prettyDisplay(root, 0);
     }
-
     private void prettyDisplay(Node node, int level) { // display2
         if (node == null) {
             return;
@@ -140,7 +140,6 @@ public class binarySearchTree {
     public boolean balanced() {
         return balanced(root);
     }
-
     // This is the helper function
     private boolean balanced(Node node) {
         if (node == null) {
@@ -150,16 +149,17 @@ public class binarySearchTree {
         return Math.abs(height(node.left) - height(node.right)) <= 1 && balanced(node.left) && balanced(node.right); // Math.abs// method// returns// the// absolute// value// of// a// number,// making// it// non-negative.// If// the// argument// is// already// non-negative,// it// returns// the// argument// itself.
     }
 
+    // populate a BST
     public void populate(int[] nums) { // // using the ReturnInsert method internally for now
         for (int i = 0; i < nums.length; i++) {
             this.ReturnInsert(nums[i]);
         }
     }
 
+    // populate a BST sorted
     public void populateSorted(int[] nums) { // if an array is sorted and we try to populate it using the default// method, then it will make the tree a Skewed Tree which we don't want so// we are using this method where we find the mid element and then insert// it, thereafter we insert the left part and the right part using// recursion
         populateSorted(nums, nums.length);
     }
-
     private void populateSorted(int[] nums, int size) {
         if (size == 0) {
             return;
@@ -169,16 +169,13 @@ public class binarySearchTree {
         this.ReturnInsert(nums[mid]); // this -> bst ( the object )
 
         populateSorted(Arrays.copyOfRange(nums, 0, mid), mid);
-        populateSorted(Arrays.copyOfRange(nums, mid + 1, size), size - mid - 1); // don't do mid -1 otherwise it will
-                                                                                 // give index 0 out of bounds for
-                                                                                 // length 0 as mid will be 0 in this
-                                                                                 // loop at one point
+        populateSorted(Arrays.copyOfRange(nums, mid + 1, size), size - mid - 1); // don't do mid -1 otherwise it will// give index 0 out of bounds for// length 0 as mid will be 0 in this// loop at one point
     }
 
+    // DFS -> preOrder, postOrder, inOrder
     public void preOrder() {
         preOrder(root);
     }
-
     private void preOrder(Node node) {
         if (node == null) {
             return;
@@ -192,7 +189,6 @@ public class binarySearchTree {
     public void InOrder() {
         InOrder(root);
     }
-
     private void InOrder(Node node) {
         if (node == null) {
             return;
@@ -206,7 +202,6 @@ public class binarySearchTree {
     public void postOrder() {
         postOrder(root);
     }
-
     private void postOrder(Node node) {
         if (node == null) {
             return;
@@ -218,17 +213,50 @@ public class binarySearchTree {
 
     }
 
+    // BFS
+    public void BFS(){
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        BFS(root, q);
+    }
+    private void BFS(Node node, Queue<Node> q) {
+        while(!q.isEmpty()){
+            Node current = q.poll();
+
+            System.out.println( current.value );
+
+            if(current.left != null) q.add(current.left);
+            if(current.right != null) q.add(current.right);
+        }
+    }
+
+    // QUESTION --> Since we need to come up to find the ancestors ( parents/grandparents/etc ) WE will use DFS and since we need to find the answer asap ( lowest common ancestor) and near the root node so we will use POT ( pre order traversal )
+    public Node LowestCommonAncestor(Node node1, Node node2){
+        return LowestCommonAncestor(root,node1,node2);
+    }
+    private Node LowestCommonAncestor(Node node, Node node1, Node node2) {
+        if(node == node1 || node == node2) return node;
+        if(node == null) return null;
+
+        Node left = LowestCommonAncestor(node.left, node1, node2);
+        Node right = LowestCommonAncestor(node.right, node1, node2);
+
+        if(left != null && right != null) return node;
+        return left == null ? right : left;
+    }
+
     public static void main(String[] args) {
         binarySearchTree bst = new binarySearchTree();
 
-        for(int i = 0 ; i < 1000; i ++){
-            bst.VoidInsert(i);
-        }
+        // for(int i = 0 ; i < 1000; i ++){
+        //     bst.VoidInsert(i);
+        // }
 
-        System.out.println(bst.height());
-        // int[] nums = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        // System.out.println(bst.height());
+        int[] nums = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-        // bst.populateSorted(nums); // using the ReturnInsert method internally for now
+        bst.populateSorted(nums); // using the ReturnInsert method internally for now
+
         // bst.ReturnInsert(10);
         // bst.ReturnInsert(15);
         // bst.ReturnInsert(5);
@@ -253,8 +281,8 @@ public class binarySearchTree {
         // bst.VoidInsert(3);
         // bst.VoidInsert(2);
 
-        // bst.display();
-        // bst.prettyDisplay();
+        bst.display();
+        bst.prettyDisplay();
 
         // System.out.println(bst.height(bst.root));
         // System.out.println(bst.height(bst.root.left));
@@ -265,5 +293,7 @@ public class binarySearchTree {
         // bst.InOrder();
         // System.out.println();
         // bst.postOrder();
+
+        bst.BFS();
     }
 }

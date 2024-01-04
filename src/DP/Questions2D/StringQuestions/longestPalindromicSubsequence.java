@@ -10,8 +10,8 @@ public class longestPalindromicSubsequence {
         System.out.println(longestPalindromicSubsequenceTabulationHelper(arr1, arr2)); 
     }
 
-    //To calculate the longest Palindromic Subsequence, just find the longest common subsequence between the arr and the reverse of that arr itself !!
-    private static int longestPalindromicSubsequenceTabulationHelper(char[] arr1, char[] arr2) {
+    //To calculate the longest Palindromic Subsequence, just find the longest common subsequence between the arr and the reverse of that arr itself
+    public static int longestPalindromicSubsequenceTabulationHelper(char[] arr1, char[] arr2) {
         int[][] dp = new int[arr1.length+1][arr2.length+1]; // AFTER INDEX SHIFTING TO RIGHT BY ONCE
         for(int i =0; i< dp.length; i++){
             Arrays.fill(dp[i], 0);

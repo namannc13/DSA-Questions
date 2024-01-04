@@ -2,7 +2,7 @@ package DP.Questions2D.StringQuestions;
 
 import java.util.Arrays;
 
-public class printLongestCommonSubString {
+public class printLongestCommonSubsequence {
     public static void main(String[] args) {
         char[] arr1 = {'a','b','c','d','e'};    
         char[] arr2 = {'a','c','e'}; 
@@ -11,10 +11,10 @@ public class printLongestCommonSubString {
         for(int i =0; i< dp.length; i++){
             Arrays.fill(dp[i], 0);
         }
-        System.out.println(printLongestCommonSubStringTabulation(arr1, arr2, dp));
+        System.out.println(printLongestCommonSubsequenceTabulation(arr1, arr2, dp));
     }
 
-    private static String printLongestCommonSubStringTabulation(char[] arr1, char[] arr2, int[][] dp) {
+    private static String printLongestCommonSubsequenceTabulation(char[] arr1, char[] arr2, int[][] dp) {
         for(int i=0; i<= arr2.length; i++){
             dp[0][i] = 0;
         }

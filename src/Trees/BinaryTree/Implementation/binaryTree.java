@@ -1,6 +1,8 @@
 package Trees.BinaryTree.Implementation;
 
 import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class binaryTree {
     private class Node {
@@ -84,6 +86,24 @@ public class binaryTree {
         prettyDisplay(node.left, level + 1);
     }
 
+    public void BFS(){
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        BFS(root, q);
+    }
+
+
+    private void BFS(Node node, Queue<Node> q) {
+        while(!q.isEmpty()){
+            Node current = q.poll();
+
+            System.out.println( current.value );
+
+            if(current.left != null) q.add(current.left);
+            if(current.right != null) q.add(current.right);
+        }
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         binaryTree bt = new binaryTree();
@@ -91,5 +111,6 @@ public class binaryTree {
         bt.display();
         System.out.println();
         bt.prettyDisplay();
+        bt.BFS();
     }
 }

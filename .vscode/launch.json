@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "binarySearchTree",
+            "request": "launch",
+            "mainClass": "Trees.BinarySearchTree.Implementation.binarySearchTree",
+            "projectName": "DSA Questions_f015c87"
+        },
+        {
+            "type": "java",
             "name": "maxSumWithNoAdjacent",
             "request": "launch",
             "mainClass": "DP.Questions.maxSumWithNoAdjacent",
