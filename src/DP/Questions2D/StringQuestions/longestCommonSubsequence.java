@@ -53,13 +53,12 @@ public class longestCommonSubsequence {
     // 2. i <= arr.length in every loop now ( <= )
     // 3. where arr mentioned => do it like this -> arr[i-1][j-1] ( normal would have been arr[i][j] )
     public static int longestCommonSubsequenceTabulationAfterIndexShifting(char[] arr1, char[] arr2, int[][] dp){
-        for(int i=0; i<= arr2.length; i++){
-            dp[0][i] = 0;
-        }
-        for(int i=0; i<= arr1.length; i++){
-            dp[i][0] = 0;
-        }
-
+        // for(int i=0; i<= arr2.length; i++){
+        //     dp[0][i] = 0;
+        // }
+        // for(int i=0; i<= arr1.length; i++){
+        //     dp[i][0] = 0;
+        // }
         for(int i =1; i<= arr1.length; i++){
             for(int j=1; j<= arr2.length; j++){
                 if(arr1[i-1] == arr2[j-1]) dp[i][j] = 1 + dp[i-1][j-1]; // match

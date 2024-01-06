@@ -1,8 +1,11 @@
 package Trees.BinarySearchTree.Implementation;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
+import java.util.TreeMap;
 
 public class binarySearchTree {
     // Node class
@@ -21,7 +24,26 @@ public class binarySearchTree {
         }
     }
 
-    private Node root;
+    // Pair Datatype
+    public class Pair{
+        private Node A;
+        private int B;
+
+        public Pair(Node A , int B ){
+            this.A = A ;
+            this.B = B ;
+        }
+
+        public Node getA(){
+            return this.A;
+        }
+        
+        public int getB(){
+            return this.B;
+        }
+    }
+    
+    public Node root;
 
     public binarySearchTree() {
 
@@ -245,6 +267,30 @@ public class binarySearchTree {
         return left == null ? right : left;
     }
 
+    // QUESTION --> Top View
+    public ArrayList<Integer> TopView(){
+        Queue<Pair> q = new LinkedList<Pair>();
+        Map<Integer,Integer> map = new TreeMap<>();
+        q.add(new Pair(root, 0));
+        return TopView(root, q, map, 0);
+    }
+    public ArrayList<Integer> TopView(Node node, Queue<Pair> q, Map<Integer,Integer> map, int level) {
+        ArrayList<Integer> list = new ArrayList<>();
+        while(!q.isEmpty()){
+            Pair current = q.poll();
+            Node temp = current.getA();
+            int x = current.getB();
+
+            if(map.get(x) == null) map.put(x, temp.value);
+            if(temp.left!= null) q.add(new Pair(temp.left, x-1));
+            if(temp.right != null) q.add(new Pair(temp.right, x+1));
+        }
+        for(Map.Entry<Integer,Integer> entry : map.entrySet()){
+            list.add(entry.getValue());
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         binarySearchTree bst = new binarySearchTree();
 
@@ -295,5 +341,6 @@ public class binarySearchTree {
         // bst.postOrder();
 
         bst.BFS();
+        System.out.println(bst.TopView());
     }
 }
