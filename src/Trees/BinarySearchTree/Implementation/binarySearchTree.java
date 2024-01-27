@@ -136,6 +136,50 @@ public class binarySearchTree {
         return node;
     }
 
+    public void remove(int value){
+        root = remove(root, value);
+    }
+    private Node remove(Node node, int value) {
+        if(node == null) return node;
+
+        if(node.value == value){
+            // 0 child
+            if(node.left == null && node.right == null){
+                return null;
+            }
+
+            // 1 child
+
+            //left child
+            if(node.left != null && node.right == null){
+                return node.left;
+            }
+
+            //right child
+            if(node.left == null && node.right != null){
+                return node.right;
+            }
+
+            // 2 child
+            if(node.left != null && node.right != null){
+                int min = getMin(node.right).value;
+                node.value = min;
+                node.right = remove(node.right, min);
+                return node;
+            }
+        }else if(node.value > value){
+            node.left = remove(node.left, value);
+        }else{
+            node.right = remove(node.right,value);
+        }
+        return node;
+    }
+    private Node getMin(Node node) {
+        if(node.left == null) return node;
+
+        return getMin(node.left);
+    }
+
     public void prettyDisplay() {
         prettyDisplay(root, 0);
     }
@@ -291,6 +335,64 @@ public class binarySearchTree {
         return list;
     }
 
+    // QUESTION --> Bottom View
+    public ArrayList<Integer> BottomView(){
+        Queue<Pair> q = new LinkedList<Pair>();
+        Map<Integer,Integer> map = new TreeMap<>();
+        q.add(new Pair(root, 0));
+        return BottomView(root, q, map, 0);
+    }
+    public ArrayList<Integer> BottomView(Node node, Queue<Pair> q, Map<Integer,Integer> map, int level) {
+        ArrayList<Integer> list = new ArrayList<>();
+        while(!q.isEmpty()){
+            Pair current = q.poll();
+            Node temp = current.getA();
+            int x = current.getB();
+
+            map.put(x, temp.value);
+            if(temp.left!= null) q.add(new Pair(temp.left, x-1));
+            if(temp.right != null) q.add(new Pair(temp.right, x+1));
+        }
+        for(Map.Entry<Integer,Integer> entry : map.entrySet()){
+            list.add(entry.getValue());
+        }
+        return list;
+    }
+    
+    //QUESTION --> LOT ( Level Order Traversal )
+    public ArrayList<ArrayList<Integer>> LOT(){
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        if(root == null) return result;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        return LOT(root, q, result);
+    }
+    private ArrayList<ArrayList<Integer>> LOT(Node node, Queue<Node> q, ArrayList<ArrayList<Integer>> result) {
+        while(!q.isEmpty()){
+            int levelSize = q.size();
+            ArrayList<Integer> current = new ArrayList<>();
+            for(int i =0; i< levelSize; i++){
+                Node temp = q.poll();
+                current.add(temp.value);
+                if(temp.left != null) q.add(temp.left);
+                if(temp.right != null) q.add(temp.right);
+            }
+            result.add(current);
+        }
+
+        return result;
+    }
+
+    //QUESTION --> Find height of a tree
+    public int getHeight(){
+        return getHeight(root);
+    }
+    private int getHeight(Node node) {
+        if(node == null) return 0;
+
+        return Math.max(getHeight(node.left), getHeight(node.right)) + 1;
+    }
+
     public static void main(String[] args) {
         binarySearchTree bst = new binarySearchTree();
 
@@ -342,5 +444,25 @@ public class binarySearchTree {
 
         bst.BFS();
         System.out.println(bst.TopView());
+        System.out.println(bst.BottomView());
+
+        System.out.println(bst.LOT());
+
+        bst.remove(5);
+
+        bst.prettyDisplay();
+        System.out.println();
+
+        bst.remove(3);
+
+        bst.prettyDisplay();
+        System.out.println();
+
+        bst.remove(6);
+        
+        bst.prettyDisplay();
+        System.out.println();
+
+        System.out.println(bst.getHeight());
     }
 }

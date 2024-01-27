@@ -30,8 +30,7 @@ public class HashtableMain {
         System.out.println("Printing the hastable : " + hash);
 
         System.out.println();
-        
+
         for (Map.Entry<String, Integer> e : hash.entrySet()) System.out.println(e.getKey() + " " + e.getValue());
-        
     }
 }
