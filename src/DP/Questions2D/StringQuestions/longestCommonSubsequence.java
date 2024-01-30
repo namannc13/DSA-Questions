@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class longestCommonSubsequence {
     public static void main(String[] args) {
-        char[] arr1 = {'a','b','c','d','e'};    
-        char[] arr2 = {'a','c','e'}; 
+        char[] arr1 = {'d','i','g','g','e','r'};    
+        char[] arr2 = {'b','i','g','g','e','r','d','i','a','g','r','a','m'}; 
 
         System.out.println(longestCommonSubsequenceRecursion(arr1, arr2, arr1.length-1, arr2.length-1));
         // System.out.println(longestCommonSubsequenceRecursion(arr1, arr2, arr1.length, arr2.length)); // AFTER INDEX SHIFTING TO RIGHT BY ONCE

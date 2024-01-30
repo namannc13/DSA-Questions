@@ -14,7 +14,7 @@ public class SelectionSort {
                     arr[j] = temp;
                 }
             }
-
+            System.out.println(Arrays.toString(arr));
         }
         System.out.println(Arrays.toString(arr));
     }

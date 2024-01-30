@@ -2,6 +2,8 @@ package Trees.AVLTree.Implementation;
 
 import java.util.Arrays;
 
+import javax.swing.tree.TreeNode;
+
 public class AVLTree {
     public class Node {
         private int value;
@@ -28,13 +30,27 @@ public class AVLTree {
         return height(root);
     }
     
-    public int height(Node node) { // this method returns the height of the tree as the node passed here will be
-                                   // the root node and the height of the root node is the height is the height of
-                                   // the tree
+    public int height(Node node) { // this method returns the height of the tree as the node passed here will be// the root node and the height of the root node is the height is the height of// the tree
         if (node == null) { // if no tree exists, return -1
             return -1;
         }
         return node.height;
+    }
+
+    public int getHeight(){
+        return getHeight(root);
+    }
+    private int getHeight(Node node) {
+        if (node == null) {
+            return 0;
+        } else {
+            // Calculate the height of the left and right subtrees
+            int leftHeight = getHeight(node.left);
+            int rightHeight = getHeight(node.right);
+
+            // Return the maximum of the left and right subtree heights, plus 1 (for the current level)
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
     }
     
     public boolean isEmpty() {
@@ -60,7 +76,6 @@ public class AVLTree {
     public void ReturnInsert(int value) {
         root = ReturnInsert(root, value);
     }
-    
     private Node ReturnInsert(Node node, int value) {
         if (node == null) {
             Node newNode = new Node(value);
@@ -96,11 +111,11 @@ public class AVLTree {
         if(height(node.left) - height(node.right) < -1){ // if the difference in the heights here is 1, it doesn't matter and it is balanced ( we are checking if the node.left and node.right are balanced or not ( unlike in the nested loop under this))
             //right heavy case
             if(height(node.right.left) - height(node.right.right) < 0){ // Here, we only want to know which side is greater so that we can apply our ways/rules ( this part is already balanced as we used bottom to up approach(So, it has already been checked))
-                //left left case
+                //right right case
                 return ReturnLeftRotate(node);
             }
             if(height(node.right.left) - height(node.right.right) > 0){ // Here, we only want to know which side is greater so that we can apply our ways/rules ( this part is already balanced as we used bottom to up approach(So, it has already been checked))
-                //left right case
+                //right left case
                 node.right = ReturnRightRotate(node.right);
                 return ReturnLeftRotate(node);
             }
@@ -172,29 +187,7 @@ public class AVLTree {
             return true;
         }
     
-        return Math.abs(height(node.left) - height(node.right)) <= 1 && balanced(node.left) && balanced(node.right); // Math.abs
-                                                                                                                     // method
-                                                                                                                     // returns
-                                                                                                                     // the
-                                                                                                                     // absolute
-                                                                                                                     // value
-                                                                                                                     // of
-                                                                                                                     // a
-                                                                                                                     // number,
-                                                                                                                     // making
-                                                                                                                     // it
-                                                                                                                     // non-negative.
-                                                                                                                     // If
-                                                                                                                     // the
-                                                                                                                     // argument
-                                                                                                                     // is
-                                                                                                                     // already
-                                                                                                                     // non-negative,
-                                                                                                                     // it
-                                                                                                                     // returns
-                                                                                                                     // the
-                                                                                                                     // argument
-                                                                                                                     // itself.
+        return Math.abs(height(node.left) - height(node.right)) <= 1 && balanced(node.left) && balanced(node.right); // Math.abs// method// returns// the// absolute// value// of// a// number,// making// it// non-negative.// If// the// argument// is// already// non-negative,// it// returns// the// argument// itself.
     }
     
     public void populate(int[] nums) { // // using the ReturnInsert method internally for now
@@ -203,11 +196,7 @@ public class AVLTree {
         }
     }
     
-    public void populateSorted(int[] nums) { // if an array is sorted and we try to populate it using the default
-                                             // method, then it will make the tree a Skewed Tree which we don't want so
-                                             // we are using this method where we find the mid element and then insert
-                                             // it, thereafter we insert the left part and the right part using
-                                             // recursion
+    public void populateSorted(int[] nums) { // if an array is sorted and we try to populate it using the default// method, then it will make the tree a Skewed Tree which we don't want so// we are using this method where we find the mid element and then insert// it, thereafter we insert the left part and the right part using// recursion
         populateSorted(nums, nums.length);
     }
     
@@ -220,10 +209,7 @@ public class AVLTree {
         this.ReturnInsert(nums[mid]); // this -> bst ( the object )
     
         populateSorted(Arrays.copyOfRange(nums, 0, mid), mid);
-        populateSorted(Arrays.copyOfRange(nums, mid + 1, size), size - mid - 1); // don't do mid -1 otherwise it will
-                                                                                 // give index 0 out of bounds for
-                                                                                 // length 0 as mid will be 0 in this
-                                                                                 // loop at one point
+        populateSorted(Arrays.copyOfRange(nums, mid + 1, size), size - mid - 1); // don't do mid -1 otherwise it will// give index 0 out of bounds for// length 0 as mid will be 0 in this// loop at one point
     }
     
     public void preOrder() {
@@ -272,10 +258,13 @@ public class AVLTree {
     public static void main(String[] args) {
         AVLTree avl1 = new AVLTree();
     
-        for(int i = 0 ; i < 1000; i ++){
-            avl1.ReturnInsert(i);
-        }
+        avl1.ReturnInsert(30);
+        avl1.ReturnInsert(20);
+        avl1.ReturnInsert(40);
+        avl1.ReturnInsert(10);
+        avl1.ReturnInsert(50);
         
-        System.out.println(avl1.root.height);
+        avl1.preOrder();
     }
 }
+

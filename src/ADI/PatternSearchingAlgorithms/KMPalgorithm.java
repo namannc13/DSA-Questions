@@ -3,7 +3,7 @@ package ADI.PatternSearchingAlgorithms;
 public class KMPalgorithm {
     public static void main(String[] args) {
         char[] mainArray = { 'a', 'b', 'x', 'a', 'b', 'c', 'a', 'b', 'y' };
-        char[] arr = {'b', 'c' };
+        char[] arr = {'a','b', 'c' };
 
         int[] ans = makeArray(arr);
         int answer = search(ans, arr, mainArray);

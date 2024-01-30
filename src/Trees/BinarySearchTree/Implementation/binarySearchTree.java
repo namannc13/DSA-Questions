@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Stack;
 import java.util.TreeMap;
 
 public class binarySearchTree {
@@ -358,7 +359,41 @@ public class binarySearchTree {
         }
         return list;
     }
-    
+
+    //QUESTION --> Right View
+    public ArrayList<Integer> RightView(){
+        ArrayList<Integer> list = new ArrayList<>();
+        RightView(root, list, 0);
+        return list;
+    }
+    private void RightView(Node node, ArrayList<Integer> list, int level) {
+        if(node == null) return;
+
+        if(level == list.size()){
+            list.add(node.value);
+        }
+
+        RightView(node.right, list, level+1);
+        RightView(node.left, list, level+1);
+    }
+
+    //QUESTION --> Left View
+    public ArrayList<Integer> LeftView(){
+        ArrayList<Integer> list = new ArrayList<>();
+        LeftView(root, list, 0);
+        return list;
+    }
+    private void LeftView(Node node, ArrayList<Integer> list, int level) {
+        if(node == null) return;
+
+        if(level == list.size()){
+            list.add(node.value);
+        }
+
+        LeftView(node.left, list, level+1);
+        LeftView(node.right, list, level+1);
+    }
+
     //QUESTION --> LOT ( Level Order Traversal )
     public ArrayList<ArrayList<Integer>> LOT(){
         ArrayList<ArrayList<Integer>> result = new ArrayList<>();
@@ -391,6 +426,29 @@ public class binarySearchTree {
         if(node == null) return 0;
 
         return Math.max(getHeight(node.left), getHeight(node.right)) + 1;
+    }
+    
+    //QUESTION --> Diameter of a tree
+    public int getDiameter(){
+        ArrayList<Integer> list = new ArrayList<>();
+        getDiameter(root,list);
+        int max=Integer.MIN_VALUE;
+        for(int i = 0; i < list.size(); i++){
+            max = Math.max(max,list.get(i));
+        }
+        return max;
+    }
+    private void getDiameter(Node node, ArrayList<Integer> list) {
+        if(node == null) return;
+
+        int leftH = getHeight(node.left);
+        int rightH = getHeight(node.right);
+
+        list.add(leftH+rightH);
+
+        getDiameter(node.left, list);
+        getDiameter(node.right, list);
+
     }
 
     public static void main(String[] args) {
@@ -445,24 +503,27 @@ public class binarySearchTree {
         bst.BFS();
         System.out.println(bst.TopView());
         System.out.println(bst.BottomView());
+        System.out.println(bst.RightView());
+        System.out.println(bst.LeftView());
 
-        System.out.println(bst.LOT());
+        // System.out.println(bst.LOT());
 
-        bst.remove(5);
+        // bst.remove(5);
 
-        bst.prettyDisplay();
-        System.out.println();
+        // bst.prettyDisplay();
+        // System.out.println();
 
-        bst.remove(3);
+        // bst.remove(3);
 
-        bst.prettyDisplay();
-        System.out.println();
+        // bst.prettyDisplay();
+        // System.out.println();
 
-        bst.remove(6);
+        // bst.remove(6);
         
-        bst.prettyDisplay();
-        System.out.println();
+        // bst.prettyDisplay();
+        // System.out.println();
 
         System.out.println(bst.getHeight());
+        System.out.println(bst.getDiameter());
     }
 }

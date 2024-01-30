@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class longestCommonSubstring {
     public static void main(String[] args) {
-        char[] arr1 = {'a','b','c','d','e'};    
-        char[] arr2 = {'a','b','c'}; 
+        char[] arr1 = {'d','i','g','g','e','r'};    
+        char[] arr2 = {'b','i','g','g','e','r','d','i','a','g','r','a','m'};
 
         int[][] dp = new int[arr1.length+1][arr2.length+1]; // AFTER INDEX SHIFTING TO RIGHT BY ONCE
         for(int i =0; i< dp.length; i++){
