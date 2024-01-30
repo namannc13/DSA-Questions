@@ -3,7 +3,11 @@ package DP.Questions;
 import java.util.Arrays;
 
 class minPathClimbingStairs {
-    public int minCostClimbingStairs(int[] cost) {
+    public static void main(String[] args) {
+        int[] cost = {10,15};
+        System.out.println(minCostClimbingStairs(cost));
+    }
+    public static int minCostClimbingStairs(int[] cost) {
         int[] dp = new int[cost.length+1];
         Arrays.fill(dp, -1); 
         // return Math.min(minCostClimbingStairsRecursion(cost, cost.length-2,dp), minCostClimbingStairsRecursion(cost, cost.length-1,dp)); // question mentioned we can start at the first step or the second step
@@ -34,7 +38,7 @@ class minPathClimbingStairs {
 
         return dp[n];
     }
-    public int minCostClimbingStairsOptimal(int[] cost, int n){
+    public static int minCostClimbingStairsOptimal(int[] cost, int n){
         int prev2 = cost[0];
         int prev1 = cost[1];
 
