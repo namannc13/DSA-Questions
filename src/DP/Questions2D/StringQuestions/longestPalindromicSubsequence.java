@@ -2,12 +2,14 @@ package DP.Questions2D.StringQuestions;
 
 import java.util.Arrays;
 
+
 public class longestPalindromicSubsequence {
     public static void main(String[] args) {
         char[] arr1 = {'b','b','a','b','c','b','c','a','b'};
         char[] arr2 = {'b','a','c','b','c','b','a','b','b'};
 
         System.out.println(longestPalindromicSubsequenceTabulationHelper(arr1, arr2)); 
+        System.out.println(longestPalindromicSubsequenceOptimalHelper(arr1,arr2));
     }
 
     //To calculate the longest Palindromic Subsequence, just find the longest common subsequence between the arr and the reverse of that arr itself
@@ -17,5 +19,8 @@ public class longestPalindromicSubsequence {
             Arrays.fill(dp[i], 0);
         }
         return longestCommonSubsequence.longestCommonSubsequenceTabulationAfterIndexShifting(arr1,arr2,dp);
+    }
+    public static int longestPalindromicSubsequenceOptimalHelper(char[] arr1,char[] arr2){
+        return longestCommonSubsequence.longestCommonSubsequenceOptimal(arr1, arr2);
     }
 }

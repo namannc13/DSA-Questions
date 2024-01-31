@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class longestCommonSubsequence {
     public static void main(String[] args) {
         char[] arr1 = {'d','i','g','g','e','r'};    
-        char[] arr2 = {'b','i','g','g','e','r','d','i','a','g','r','a','m'}; 
+        char[] arr2 = {'i','g','g','e','r','d','r'}; 
 
         System.out.println(longestCommonSubsequenceRecursion(arr1, arr2, arr1.length-1, arr2.length-1));
         // System.out.println(longestCommonSubsequenceRecursion(arr1, arr2, arr1.length, arr2.length)); // AFTER INDEX SHIFTING TO RIGHT BY ONCE
@@ -27,6 +27,8 @@ public class longestCommonSubsequence {
         for(int i =0; i< dp2.length; i++){
             System.out.println(Arrays.toString(dp2[i]));
         }
+
+        System.out.println(longestCommonSubsequenceOptimal(arr1, arr2));
     }
 
     private static int longestCommonSubsequenceRecursionDP(char[] arr1, char[] arr2, int index1, int index2, int[][] dp) {
@@ -66,5 +68,23 @@ public class longestCommonSubsequence {
             }
         }
         return dp[arr1.length][arr2.length];
+    }
+    public static int longestCommonSubsequenceOptimal(char[] arr1, char[] arr2){
+        int[] prev = new int[arr2.length+1];
+        Arrays.fill(prev, 0);
+        int[] curr = new int[arr2.length+1];
+        Arrays.fill(curr, 0);
+
+        for(int i=1; i<= arr1.length; i++){
+            for(int j=1; j<=arr2.length; j++){
+                if(arr1[i-1] == arr2[j-1]) curr[j] = 1 + prev[j-1];
+                else curr[j] = Math.max(prev[j],curr[j-1]);
+            }
+            System.out.println(Arrays.toString(curr) + Arrays.toString(prev));
+            prev = Arrays.copyOf(curr, curr.length); // VIMPORTANT -> we need to take the copy of the curr array in prev array !!idk why
+
+        }
+        
+        return prev[arr2.length];
     }
 }

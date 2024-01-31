@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class printLongestCommonSubsequence {
     public static void main(String[] args) {
         char[] arr1 = {'a','b','c','d','e'};    
-        char[] arr2 = {'a','c','e'}; 
+        char[] arr2 = {'b','d','g','e','k'}; 
 
         int[][] dp = new int[arr1.length+1][arr2.length+1]; // AFTER INDEX SHIFTING TO RIGHT BY ONCE
         for(int i =0; i< dp.length; i++){
