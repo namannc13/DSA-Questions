@@ -2,6 +2,7 @@ package DP.Questions2D.StockQuestions;
 
 import java.util.Arrays;
 
+// EXACTLY THE SAME QUES AS BUYANDSELLSTOCKII ( just a oneline difference)
 public class buyAndSellStockWithFee {
     public static void main(String[] args) {
         int[] stock = {1,3,2,8,4,9};
