@@ -4,8 +4,11 @@ import java.util.Arrays;
 
 public class countOfSubsetsWithSumK {
     public static void main(String[] args) { // this will not solve for array if it is 0 as elements
-        int[] arr = {0,0,1};
-        int target = 1;
+        // to solve the ques when we have zeroes in the beginning of the array
+        // 1. sort the array in descending order and then the answer will be correct
+        // 2. use the pow method used below 
+        int[] arr = {1,1,1};
+        int target = 2;
 
         System.out.println(countOfSubsetsWithSumKRecursion(arr, arr.length-1, target)); // if no zero
         // if there are 0's in array // count the number of 0's
@@ -33,6 +36,9 @@ public class countOfSubsetsWithSumK {
         for(int i =0; i < dp.length; i++){
             System.out.println(Arrays.toString(dp[i])); 
         }
+
+        System.out.println("optimal" + countOfSubsetsWithSumKOptimal(arr, target));
+        System.out.println(2 * countOfSubsetsWithSumKOptimal(arr, target)); // if zero // idk what to do bruh for this method . 
     }
 
     private static int countOfSubsetsWithSumKRecursionDP(int[] arr, int index, int target, int[][] dp) {
@@ -81,5 +87,29 @@ public class countOfSubsetsWithSumK {
             }
         }
         return dp[dp.length-1][target];
+    }
+
+    public static int countOfSubsetsWithSumKOptimal(int[] arr, int target){
+        int[] prev = new int[target+1];
+        Arrays.fill(prev,0);
+        int[] curr = new int[target+1];
+        Arrays.fill(curr,0);
+
+        for(int i =0; i< prev.length; i++){ // base case 1
+            prev[0] = 1;
+        }
+        if(arr[0] <= target) prev[arr[0]] = 1; // base case 2
+
+        for(int i =1; i< arr.length; i++){ // if the base case of index is done, then just start from 1
+            for(int j = 0; j<= target; j++){
+                int notPick = prev[j];
+                int pick = 0;
+                if(arr[i] <= j ) pick = prev[ j-arr[i]];
+
+                curr[j] = notPick + pick;
+            }
+            prev = Arrays.copyOf(curr, curr.length);
+        }
+        return prev[target];
     }
 }

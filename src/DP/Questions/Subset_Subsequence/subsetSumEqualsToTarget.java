@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class subsetSumEqualsToTarget {
     public static void main(String[] args) {
-        int[] arr = {1,1,1,1};
-        int target = 4;
+        int[] arr = {1,1,1};
+        int target = 2;
 
         System.out.println(subsetSumEqualsToTargetRecursion(arr,arr.length-1,target));
 
@@ -27,12 +27,9 @@ public class subsetSumEqualsToTarget {
 
         System.out.println(subsetSumEqualsToTargetTabulation(arr, target, dpBoolean));
 
-        for(int i = 0; i< dpBoolean.length; i++){
-            for(int j = 0; j<= target; j++){
-                System.out.print(dpBoolean[i][j] + " ");
-            }
-            System.out.println();
-        }
+        
+
+        System.out.println(subsetSumEqualsToTargetOptimal(arr, target));
     }
 
     private static boolean subsetSumEqualsToTargetRecursion(int[] arr,int index, int target) {
@@ -90,5 +87,29 @@ public class subsetSumEqualsToTarget {
             }
         }
         return dpBoolean[arr.length-1][target]; 
+    }
+
+    static boolean subsetSumEqualsToTargetOptimal(int[] arr,int target){
+        Boolean[] prev = new Boolean[target+1];
+        Arrays.fill(prev, false);
+        Boolean[] curr = new Boolean[target+1];
+        Arrays.fill(curr, false);
+
+        prev[0] = curr[0] = true;
+
+        if(arr[0] <= target) prev[arr[0]] = true; // (arr[0] <= target) for cases when the arr is {100} .and we sent the target as half the sum plus 1 (50 + 1)
+
+        for(int i = 1; i< arr.length; i++){ // for index
+            for(int j = 1; j <= target; j++){ // for target
+                boolean notPick = prev[j];
+                boolean Pick = false; 
+                if(j >= arr[i]){ 
+                    Pick = prev[j - arr[i]];
+                }
+                curr[j] = notPick || Pick;
+            }
+            prev = Arrays.copyOf(curr, curr.length);
+        }
+        return prev[target]; 
     }
 }

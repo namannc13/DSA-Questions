@@ -7,6 +7,8 @@ public class partitionASetIntoTwoSubsetsWithMinAbsSumDifference {
         int[] arr = {2,3,7};
 
         System.out.println(partitionASetIntoTwoSubsetsWithMinAbsSumDifferenceTabulationHelper(arr));
+
+        System.out.println(partitionASetIntoTwoSubsetsWithMinAbsSumDifferenceOptimalHelper(arr));
     }
 
     private static int partitionASetIntoTwoSubsetsWithMinAbsSumDifferenceTabulationHelper(int[] arr) {
@@ -63,5 +65,50 @@ public class partitionASetIntoTwoSubsetsWithMinAbsSumDifference {
                 dpBoolean[i][j] = notPick || Pick;
             }
         } 
+    }
+
+    public static int partitionASetIntoTwoSubsetsWithMinAbsSumDifferenceOptimalHelper(int[] arr){
+        int sum = 0;
+        for(int i = 0; i< arr.length; i++){
+            sum += arr[i];
+        }
+
+        Boolean[] prev = new Boolean[sum+1];
+        Arrays.fill(prev, false);
+        Boolean[] curr = new Boolean[sum+1];
+        Arrays.fill(curr, false);
+
+        prev[0] = curr[0] = true;
+
+        subsetSumEqualsToTargetOptimal(arr, sum, prev, curr);
+
+        for(int i=0; i< curr.length; i++){
+            System.out.print(curr[i] + " ");
+        }
+
+        int answer = Integer.MAX_VALUE;
+        for(int i = 0; i<= sum/2; i++){ // now we will traverse through all the values and pick out which values are valid ( a vlaue is valid if the elements of the array can form that value by addition )
+            if(curr[i]){ // means it is valid
+                int sum1 = i;
+                int sum2 = sum - sum1; // if the sum of first subset is 1, and the total sum is 12. then we are finding the sum of the second subset here which will be 11
+                answer = Math.min(answer, Math.abs(sum1-sum2)); // finding whether the difference of these pair of subset sums are minimum or not than the answer ( we have to find the minimum difference in the sum of both subsets )
+            }
+        }
+        return answer;
+    }
+    static void subsetSumEqualsToTargetOptimal(int[] arr,int target,Boolean[] prev, Boolean[] curr){
+        if(arr[0] <= target) prev[arr[0]] = true; // (arr[0] <= target) for cases when the arr is {100} .and we sent the target as half the sum plus 1 (50 + 1)
+
+        for(int i = 1; i< arr.length; i++){ // for index
+            for(int j = 1; j <= target; j++){ // for target
+                boolean notPick = prev[j];
+                boolean Pick = false; 
+                if(j >= arr[i]){ 
+                    Pick = prev[j - arr[i]];
+                }
+                curr[j] = notPick || Pick;
+            }
+            prev = Arrays.copyOf(curr, curr.length);
+        }
     }
 }
