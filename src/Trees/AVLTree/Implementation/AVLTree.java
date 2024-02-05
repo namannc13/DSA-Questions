@@ -2,8 +2,6 @@ package Trees.AVLTree.Implementation;
 
 import java.util.Arrays;
 
-import javax.swing.tree.TreeNode;
-
 public class AVLTree {
     public class Node {
         private int value;
