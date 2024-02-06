@@ -12,7 +12,7 @@ public class countPartitionsWithGivenDifference {
         System.out.println(countPartitionsWithGivenDifferenceOptimalHelper(arr, difference));
     }
 
-    private static int countPartitionsWithGivenDifferenceRecursionHelper(int[] arr, int index, int difference) {
+     static int countPartitionsWithGivenDifferenceRecursionHelper(int[] arr, int index, int difference) {
         int sum = 0; 
         for(int i : arr){
             sum += i;
@@ -22,7 +22,7 @@ public class countPartitionsWithGivenDifference {
         return countOfSubsetsWithSumKIncludingZeroes.countOfSubsetsWithSumKIncludingZeroesRecursion(arr, index, (sum-difference)/2);
     }
 
-    private static int countPartitionsWithGivenDifferenceRecursionDPHelper(int[] arr, int index, int difference) {
+     static int countPartitionsWithGivenDifferenceRecursionDPHelper(int[] arr, int index, int difference) {
         int sum = 0; 
         for(int i : arr){
             sum += i;
@@ -36,7 +36,7 @@ public class countPartitionsWithGivenDifference {
         return countOfSubsetsWithSumKIncludingZeroes.countOfSubsetsWithSumKIncludingZeroesRecursionDP(arr, index, (sum-difference)/2,dp);
     }
 
-    private static int countPartitionsWithGivenDifferenceTabulationHelper(int[] arr,int difference) {
+     static int countPartitionsWithGivenDifferenceTabulationHelper(int[] arr,int difference) {
         int sum = 0; 
         for(int i : arr){
             sum += i;
@@ -50,7 +50,7 @@ public class countPartitionsWithGivenDifference {
         return countOfSubsetsWithSumKIncludingZeroes.countOfSubsetsWithSumKIncludingZeroesTabulation(arr, (sum-difference)/2,dp);
     }
     
-    private static int countPartitionsWithGivenDifferenceOptimalHelper(int[] arr,int difference) {
+     static int countPartitionsWithGivenDifferenceOptimalHelper(int[] arr,int difference) {
         int sum = 0; 
         for(int i : arr){
             sum += i;
