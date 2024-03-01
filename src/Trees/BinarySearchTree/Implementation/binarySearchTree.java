@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.TreeMap;
 
+import javax.swing.tree.TreeNode;
+
 public class binarySearchTree {
     // Node class
     public class Node {
@@ -413,8 +415,85 @@ public class binarySearchTree {
             }
             result.add(current);
         }
-
+        
         return result;
+    }
+    
+    //QUESTION --> Average of Levels ( Level Order Traversal )
+    public ArrayList<Integer> AverageOfLevels(){
+        ArrayList<Integer> result = new ArrayList<>();
+        if(root == null) return result;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        return AverageOfLevels(root, q, result);
+    }
+    private ArrayList<Integer> AverageOfLevels(Node node, Queue<Node> q, ArrayList<Integer> result) {
+        while(!q.isEmpty()){
+            int levelSize = q.size();
+            int averageOfLevel = 0;
+            for(int i =0; i< levelSize; i++){
+                Node temp = q.poll();
+                averageOfLevel += temp.value;
+                if(temp.left != null) q.add(temp.left);
+                if(temp.right != null) q.add(temp.right);
+            }
+            averageOfLevel = averageOfLevel/levelSize;
+            result.add(averageOfLevel);
+        }
+        return result;
+    }
+    
+    //QUESTION --> Sum of Levels ( Level Order Traversal )
+    public ArrayList<Integer> SumOfLevels(){
+        ArrayList<Integer> result = new ArrayList<>();
+        if(root == null) return result;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        return SumOfLevels(root, q, result);
+    }
+    private ArrayList<Integer> SumOfLevels(Node node, Queue<Node> q, ArrayList<Integer> result) {
+        while(!q.isEmpty()){
+            int levelSize = q.size();
+            int averageOfLevel = 0;
+            for(int i =0; i< levelSize; i++){
+                Node temp = q.poll();
+                averageOfLevel += temp.value;
+                if(temp.left != null) q.add(temp.left);
+                if(temp.right != null) q.add(temp.right);
+            }
+            result.add(averageOfLevel);
+        }
+        return result;
+    }
+    
+    
+    //QUESTION --> Maximum Sum Level ( Level Order Traversal )
+    public int MaxSumLevel(){
+        if(root == null) return -1;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        return MaxSumLevel(root, q);
+    }
+    private int MaxSumLevel(Node node, Queue<Node> q) {
+        int maxSum = Integer.MIN_VALUE;
+        int ans = 0;
+        int level = 1;
+        while(!q.isEmpty()){
+            int levelSize= q.size();
+            int levelSum = 0;
+            for(int i =0; i< levelSize; i++){
+                Node temp = q.poll();
+                levelSum += temp.value;
+                if(temp.left != null) q.add(temp.left);
+                if(temp.right != null) q.add(temp.right);
+            }
+            if(levelSum > maxSum){
+                maxSum = levelSum;
+                ans = level;
+            }
+            level++;
+        }
+        return ans;
     }
 
     //QUESTION --> Find height of a tree
@@ -524,5 +603,12 @@ public class binarySearchTree {
 
         System.out.println(bst.getHeight());
         System.out.println(bst.getDiameter());
+
+        System.out.println();
+        System.out.println(bst.AverageOfLevels());
+        System.out.println();
+        System.out.println(bst.SumOfLevels());
+        System.out.println();
+        System.out.println(bst.MaxSumLevel());
     }
 }
