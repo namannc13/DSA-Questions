@@ -4,7 +4,20 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-    
+        {
+            "type": "java",
+            "name": "SegmentTree",
+            "request": "launch",
+            "mainClass": "Trees.SegmentTree.Implementation.SegmentTree",
+            "projectName": "DSA-Questions_a1685938"
+        },
+        {
+            "type": "java",
+            "name": "binaryTree",
+            "request": "launch",
+            "mainClass": "Trees.BinaryTree.Implementation.binaryTree",
+            "projectName": "DSA-Questions_a1685938"
+        },
         {
             "type": "java",
             "name": "binarySearchTree",
