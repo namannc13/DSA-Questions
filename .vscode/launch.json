@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "populatingNextRightPointersInEachNode",
+            "request": "launch",
+            "mainClass": "Trees.BinarySearchTree.Ques.populatingNextRightPointersInEachNode",
+            "projectName": "DSA-Questions_a1685938"
+        },
+        {
+            "type": "java",
             "name": "binarySearchTree",
             "request": "launch",
             "mainClass": "Trees.BinarySearchTree.Implementation.binarySearchTree",

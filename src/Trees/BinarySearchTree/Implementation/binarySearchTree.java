@@ -2,12 +2,11 @@ package Trees.BinarySearchTree.Implementation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.TreeMap;
-
-import javax.swing.tree.TreeNode;
 
 public class binarySearchTree {
     // Node class
@@ -496,6 +495,89 @@ public class binarySearchTree {
         return ans;
     }
 
+    //QUESTION --> Level Order Successor ( Level Order Traversal )
+    public int LevelOrderSuccessor(int data){
+        if(root == null) return -1;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        return LevelOrderSuccessor(root, q, data);
+    }
+    private int LevelOrderSuccessor(Node node, Queue<Node> q, int data) {
+        while(!q.isEmpty()){
+            int levelSize= q.size();
+            for(int i =0; i< levelSize; i++){
+                Node temp = q.poll();
+                if(temp.left != null) q.add(temp.left);
+                if(temp.right != null) q.add(temp.right);
+                if(temp.value == data){
+                    if(!q.isEmpty()){
+                        Node ans = q.poll();
+                        return ans.value;
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+
+    //QUESTION --> Zig Zag Traversal ( Level Order Traversal )
+    public ArrayList<ArrayList<Integer>> ZigZagTraversal(){
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        if(root == null) return result;
+        Deque<Node> q = new LinkedList<>();
+        q.add(root);
+        boolean reverse = false;
+        return ZigZagTraversal(root, q, result, reverse);
+    }
+    private ArrayList<ArrayList<Integer>> ZigZagTraversal(Node node, Deque<Node> q, ArrayList<ArrayList<Integer>> result, boolean reverse) {
+        while(!q.isEmpty()){
+            int levelSize = q.size();
+            ArrayList<Integer> current = new ArrayList<>();
+            for(int i =0; i< levelSize; i++){
+                if(!reverse){
+                    Node temp = q.pollFirst();
+                    current.add(temp.value);
+                    if(temp.left != null) q.addLast(temp.left);
+                    if(temp.right != null) q.addLast(temp.right);
+                    
+                }else{
+                    Node temp = q.pollLast();
+                    current.add(temp.value);
+                    if(temp.right != null) q.addFirst(temp.right);
+                    if(temp.left != null) q.addFirst(temp.left);
+                }
+            }
+            reverse = !reverse;
+            result.add(current);
+        }
+        return result;
+    }
+
+    //QUESTION --> LOT Reverse ( Level Order Traversal )
+    public ArrayList<ArrayList<Integer>> LOTReverse(){
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        if(root == null) return result;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        return LOTReverse(root, q, result);
+    }
+    private ArrayList<ArrayList<Integer>> LOTReverse(Node node, Queue<Node> q, ArrayList<ArrayList<Integer>> result) {
+        while(!q.isEmpty()){
+            int levelSize = q.size();
+            ArrayList<Integer> current = new ArrayList<>();
+            for(int i =0; i< levelSize; i++){
+                Node temp = q.poll();
+                current.add(temp.value);
+                if(temp.left != null) q.add(temp.left);
+                if(temp.right != null) q.add(temp.right);
+            }
+            result.add(0,current);
+        }
+        
+        return result;
+    }
+
+
     //QUESTION --> Find height of a tree
     public int getHeight(){
         return getHeight(root);
@@ -610,5 +692,13 @@ public class binarySearchTree {
         System.out.println(bst.SumOfLevels());
         System.out.println();
         System.out.println(bst.MaxSumLevel());
+        System.out.println();
+        System.out.println(bst.LevelOrderSuccessor(2));
+        System.out.println();
+        System.out.println(bst.ZigZagTraversal());
+        System.out.println();
+        System.out.println(bst.LOT());
+        System.out.println();
+        System.out.println(bst.LOTReverse());
     }
 }
