@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.TreeMap;
 
+import javax.swing.tree.TreeNode;
+
 public class binarySearchTree {
     // Node class
     public class Node {
@@ -577,6 +579,102 @@ public class binarySearchTree {
         return result;
     }
 
+    //QUESTION --> Right View of Tree ( Using LOT purely ( the above right view solution uses different method ))
+    public ArrayList<Integer> RightViewLOT(){
+        ArrayList<Integer> result = new ArrayList<>();
+        if(root == null) return result;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        return RightViewLOT(root, q, result);
+    }
+    private ArrayList<Integer> RightViewLOT(Node node, Queue<Node> q, ArrayList<Integer> result) {
+        while(!q.isEmpty()){
+            int levelSize = q.size();
+            for(int i =0; i< levelSize; i++){
+                Node temp = q.poll();
+                if(i == levelSize-1){
+                    result.add(temp.value);
+                }
+                if(temp.left != null) q.add(temp.left);
+                if(temp.right != null) q.add(temp.right);
+            }
+        }
+        return result;
+    }
+
+    //QUESTION --> Left View of Tree ( Using LOT purely ( the above right view solution uses different method ))
+    public ArrayList<Integer> LeftViewLOT(){
+        ArrayList<Integer> result = new ArrayList<>();
+        if(root == null) return result;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        return LeftViewLOT(root, q, result);
+    }
+    private ArrayList<Integer> LeftViewLOT(Node node, Queue<Node> q, ArrayList<Integer> result) {
+        while(!q.isEmpty()){
+            int levelSize = q.size();
+            for(int i =0; i< levelSize; i++){
+                Node temp = q.poll();
+                if(i == 0){
+                    result.add(temp.value);
+                }
+                if(temp.left != null) q.add(temp.left);
+                if(temp.right != null) q.add(temp.right);
+            }
+        }
+        return result;
+    }
+
+    //QUESTION --> Is Cousins or not
+    public boolean isCousins(int x , int y){
+        return isCousins(root, x, y);
+    }
+    private boolean isCousins(Node root, int x, int y) {
+        Node xx = findNode(root, x);
+        Node yy = findNode(root, y);
+
+        return (
+            (level(root, xx, 0) == level(root, yy, 0)) && (!isSibling(root, xx, yy))
+        );
+    }
+    private Node findNode(Node node, int x) {
+        if (node == null) {
+            return null;
+        }
+        if (node.value == x) {
+            return node;
+        }   
+        Node n = findNode(node.left, x);
+        if (n != null) {
+            return n;
+        }
+        return findNode(node.right, x);
+    }
+    private boolean isSibling (Node node, Node x, Node y) {
+        if (node == null) {
+            return false;
+        }   
+
+        return (
+        (node.left == x && node.right == y) || (node.left == y && node.right == x)
+        || isSibling(node.left, x, y) || isSibling(node.right, x, y)
+        );
+    }
+    private int level (Node node, Node x, int lev) {
+        if(node == null) {
+            return 0;
+        }
+
+        if(node == x) {
+            return lev;
+        }
+
+        int l = level(node.left, x, lev+1);
+        if (l != 0) {
+            return l;
+        }
+        return level(node.right, x, lev+1);
+    }
 
     //QUESTION --> Find height of a tree
     public int getHeight(){
@@ -700,5 +798,11 @@ public class binarySearchTree {
         System.out.println(bst.LOT());
         System.out.println();
         System.out.println(bst.LOTReverse());
+        System.out.println();
+        System.out.println(bst.RightViewLOT());
+        System.out.println();
+        System.out.println(bst.LeftViewLOT());
+        System.out.println();
+        System.out.println(bst.isCousins(7, 4));
     }
 }
