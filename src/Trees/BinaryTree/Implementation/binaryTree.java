@@ -104,6 +104,40 @@ public class binaryTree {
         }
     }
 
+    //QUESTION --> is Symmetric or not ( is mirror or not )
+    public boolean isSymmetric(){
+        return isSymmetric(root);
+    }
+    public boolean isSymmetric(Node node) {
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root.left);
+        queue.add(root.right);
+
+        while(!queue.isEmpty()) {
+            Node left = queue.poll();
+            Node right = queue.poll();
+
+            if(left == null && right == null) {
+                continue;
+            }
+            
+            if(left == null || right == null) {
+                return false;
+            }
+
+            if (left.value != right.value) {
+                return false;
+            }
+
+            queue.add(left.left);
+            queue.add(right.right);
+            queue.add(left.right);
+            queue.add(right.left);
+        
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         binaryTree bt = new binaryTree();
@@ -112,5 +146,7 @@ public class binaryTree {
         System.out.println();
         bt.prettyDisplay();
         bt.BFS();
+        System.out.println();
+        System.out.println(bt.isSymmetric());
     }
 }

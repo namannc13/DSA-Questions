@@ -709,6 +709,29 @@ public class binarySearchTree {
 
     }
 
+    //QUESTION --> diameter of a binary search tree
+    int diameter = 0;
+    public int diameterOfBinaryTree(){
+        return diameterOfBinaryTree(root);
+    }
+    public int diameterOfBinaryTree(Node root) {
+        heightOfBinaryTree(root);
+        return diameter-1; 
+    }
+    int heightOfBinaryTree(Node node) {
+        if(node == null) {
+            return 0;
+        }
+
+        int leftHeight = heightOfBinaryTree(node.left);
+        int rightHeight = heightOfBinaryTree(node.right);
+
+        int dia = leftHeight + rightHeight + 1;
+        diameter = Math.max(diameter, dia);
+
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
     public static void main(String[] args) {
         binarySearchTree bst = new binarySearchTree();
 
@@ -804,5 +827,11 @@ public class binarySearchTree {
         System.out.println(bst.LeftViewLOT());
         System.out.println();
         System.out.println(bst.isCousins(7, 4));
+        System.out.println();
+        System.out.println();
+        System.out.println(bst.getDiameter());
+        System.out.println();
+        System.out.println(bst.diameterOfBinaryTree());
+        
     }
 }
