@@ -732,6 +732,83 @@ public class binarySearchTree {
         return Math.max(leftHeight, rightHeight) + 1;
     }
 
+    //QUESTION --> invert a tree
+    public void invertTree(){
+        invertTree(root);
+    }
+    private Node invertTree(Node node) {
+        if (node == null) {
+          return null;
+        }
+    
+        Node left = invertTree(node.left);
+        Node right = invertTree(node.right);
+    
+        node.left = right;
+        node.right = left;
+    
+        return node;
+    }
+
+    //QUESTION --> Find the max Depth of a tree ( maximum nodes from root to the leaf node)
+    public int maxDepth(){
+        return maxDepth(root);
+    }
+    private int maxDepth(Node node){
+        if(node == null) return 0;
+
+        return Math.max(maxDepth(node.left), maxDepth(node.right)) + 1;
+    }
+
+    //QUESTION --> Convert a sorted array to BST
+    public Node sortedArrayToBST(int[] nums) {
+        addInBSTSorted(nums, 0, nums.length-1);
+        return root;
+    }
+    public void addInBSTSorted(int[] nums, int start, int end){
+        if(start > end){
+            return;
+        }
+        int mid = (start + end + 1)/2;
+        addInBST(nums[mid]);
+
+        addInBSTSorted(nums, start, mid-1);
+        addInBSTSorted(nums, mid+1, end);
+    }
+    public void addInBST(int value){
+        root = addInBST(root, value);
+    }
+    public Node addInBST(Node node, int value){
+        if(node == null){
+            Node newNode = new Node(value);
+            return newNode;
+        }
+        if(value < node.value) node.left = addInBST(node.left, value);
+        if(value > node.value) node.right = addInBST(node.right, value);
+        return node;
+    }
+
+    //QUESTION --> Flatten a tree
+    private void flatten(){
+        flatten(root);
+    }
+    public void flatten(Node node) {
+        Node current = node;
+        while (current != null) {
+          if (current.left != null) {
+            Node temp = current.left;
+            while(temp.right != null) {
+              temp = temp.right;
+            }
+    
+            temp.right = current.right;
+            current.right = current.left;
+            current.left= null;
+          }
+          current = current.right;
+        }
+    }
+
     public static void main(String[] args) {
         binarySearchTree bst = new binarySearchTree();
 
@@ -742,7 +819,8 @@ public class binarySearchTree {
         // System.out.println(bst.height());
         int[] nums = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-        bst.populateSorted(nums); // using the ReturnInsert method internally for now
+        bst.sortedArrayToBST(nums);
+        // bst.populateSorted(nums); // using the ReturnInsert method internally for now
 
         // bst.ReturnInsert(10);
         // bst.ReturnInsert(15);
@@ -832,6 +910,14 @@ public class binarySearchTree {
         System.out.println(bst.getDiameter());
         System.out.println();
         System.out.println(bst.diameterOfBinaryTree());
+        System.out.println();
+        bst.invertTree();
+        bst.prettyDisplay();
+        System.out.println();
+        System.out.println(bst.maxDepth());
+
+        // bst.flatten();
+        // bst.prettyDisplay();
         
     }
 }
