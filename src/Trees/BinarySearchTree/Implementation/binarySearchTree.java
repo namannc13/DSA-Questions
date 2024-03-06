@@ -809,6 +809,55 @@ public class binarySearchTree {
         }
     }
 
+    //QUESTION --> is Valid tree or not
+    public boolean isValidBST() {
+        return helper(root, null, null);
+    }
+    public boolean helper(Node node, Integer low, Integer high) {
+        if (node == null) {
+            return true;
+        }
+
+        if (low != null && node.value <= low) {
+            return false;
+        }
+
+        if(high != null && node.value >= high) {
+            return false;
+        }
+
+        boolean leftTree = helper(node.left, low, node.value);
+        boolean rightTree = helper(node.right, node.value, high);
+
+        return leftTree && rightTree;
+    }
+
+    //QUESTION --> Lowest Common Ancestor
+    public int lowestCommonAncestor(int x, int y){
+        Node p = findNode(root, x);
+        Node q =findNode(root, y);
+        Node ans = lowestCommonAncestor(root, p, q);
+        return ans.value;
+    }
+    public Node lowestCommonAncestor(Node root, Node p, Node q) {
+        if (root == null) {
+          return null;
+        }
+  
+        if (root == p || root == q) {
+          return root;
+        }
+  
+        Node left = lowestCommonAncestor(root.left, p, q);
+        Node right = lowestCommonAncestor(root.right, p, q);
+  
+        if (left != null && right != null) {
+          return root;
+        }
+  
+        return left == null ? right : left;
+    }
+
     public static void main(String[] args) {
         binarySearchTree bst = new binarySearchTree();
 
@@ -911,13 +960,17 @@ public class binarySearchTree {
         System.out.println();
         System.out.println(bst.diameterOfBinaryTree());
         System.out.println();
-        bst.invertTree();
+        // bst.invertTree();
         bst.prettyDisplay();
         System.out.println();
         System.out.println(bst.maxDepth());
 
         // bst.flatten();
         // bst.prettyDisplay();
-        
+
+        System.out.println();
+        System.out.println(bst.isValidBST());
+        System.out.println();
+        System.out.println(bst.lowestCommonAncestor(5, 1));
     }
 }
