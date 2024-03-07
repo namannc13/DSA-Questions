@@ -858,6 +858,54 @@ public class binarySearchTree {
         return left == null ? right : left;
     }
 
+    //QUESTION --> fint the kth smallest number in a tree
+    int count = 0;
+    public int kthSmallest(int k) {
+        return helper(root, k).value;
+    }
+    public Node helper(Node root, int k) {
+      if (root == null) {
+        return null;
+      }
+  
+      Node left = helper(root.left, k);
+
+      if (left != null) {
+        return left;
+      }
+
+      count++;
+
+      if(count == k) {
+        return root;
+      }
+
+      return helper(root.right, k);
+    }
+
+    //QUESTION --> build a tree when the preOrder and inOrder array is given 
+    public Node buildTree(int[] preorder, int[] inorder) {
+        if (preorder.length == 0) {
+          return null;
+        }
+  
+        int r = preorder[0];
+        int index = 0;
+  
+        for(int i=0; i<inorder.length; i++) {
+          if(inorder[i] == r) {
+            index = i;
+          }
+        }
+  
+        Node node = new Node(r);
+  
+        node.left = buildTree(Arrays.copyOfRange(preorder, 1, index + 1), Arrays.copyOfRange(inorder, 0, index));
+        node.right = buildTree(Arrays.copyOfRange(preorder, index + 1, preorder.length), Arrays.copyOfRange(inorder, index + 1, inorder.length));
+  
+        return node;
+    }
+
     public static void main(String[] args) {
         binarySearchTree bst = new binarySearchTree();
 
@@ -972,5 +1020,13 @@ public class binarySearchTree {
         System.out.println(bst.isValidBST());
         System.out.println();
         System.out.println(bst.lowestCommonAncestor(5, 1));
+        System.out.println();
+        System.out.println(bst.kthSmallest(7));
+        System.out.println();
+
+        int[] preOrder = {3, 8, 9, 20, 15, 7};
+        int[] inOrder = {8, 9, 3, 15, 20,7};
+        Node rootOfNewTree = bst.buildTree(preOrder, inOrder);
+        bst.prettyDisplay(rootOfNewTree, 0);
     }
 }
