@@ -2,6 +2,7 @@ package Trees.BinarySearchTree.Implementation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Map;
@@ -906,6 +907,108 @@ public class binarySearchTree {
         return node;
     }
 
+    //QUESTION --> Serialize and Deserialize a tree Using ArrayList<String>
+    public ArrayList<String> Serialize(){
+        ArrayList<String> list = new ArrayList<>();
+        SerializeHelper(root, list);
+        return list;
+    } 
+    public void SerializeHelper(Node root, ArrayList<String> list){
+        if(root == null){
+            list.add("null");
+            return;
+        }
+
+        list.add(String.valueOf(root.value));
+
+        SerializeHelper(root.left, list);
+        SerializeHelper(root.right, list);
+    }
+
+    public Node DeSerialize(ArrayList<String> list){
+        Collections.reverse(list);
+        Node root2 = DeSerializeHelper(list);
+        return root2;
+    }
+    public Node DeSerializeHelper(ArrayList<String> list){
+        String a = list.remove(list.size()-1);
+
+        if(a.equals("null")){
+            return null;
+        }
+
+        Node node = new Node(Integer.parseInt(a));
+
+        node.left = DeSerializeHelper(list);
+        node.right = DeSerializeHelper(list);
+
+        return node;
+    }
+
+    //QUESTION --> Serialize and Deserialize a tree Using String
+    public String SerializeString(){
+        return SerializeStringHelper(root);
+    } 
+    public String SerializeStringHelper(Node root){
+        if(root == null){
+            return ",null";
+        }
+
+        String list = "," + String.valueOf(root.value);
+
+        list += SerializeStringHelper(root.left);
+        list += SerializeStringHelper(root.right);
+
+        return list;
+    }
+
+    public Node DeSerializeString(String str){
+        String[] s = str.split(",");
+        return DeSerializeStringHelper(s);
+    }
+    public Node DeSerializeStringHelper(String[] str){
+        ArrayList<String> list = new ArrayList<>();
+        for(int i = 1; i< str.length; i++){
+                list.add(str[i]);
+        }
+        Collections.reverse(list);
+        Node root3 = DeSerializeStringHelper2(list);
+        return root3;
+    }
+    public Node DeSerializeStringHelper2(ArrayList<String> list){
+        String a = list.remove(list.size()-1);
+
+        if(a.equals("null")){
+            return null;
+        }
+
+        Node node = new Node(Integer.parseInt(a));
+
+        node.left = DeSerializeStringHelper2(list);
+        node.right = DeSerializeStringHelper2(list);
+
+        return node;
+    }
+
+    //QUESTION --> Path Sum
+    public boolean hasPathSum(int targetSum){
+        return hasPathSum(root, targetSum);
+    }
+    public boolean hasPathSum(Node root, int targetSum) {
+        if(root == null) return false;
+        return hasPathSumHelper(root, targetSum);
+    }
+    public boolean hasPathSumHelper(Node root, int targetSum){
+        if(root == null){
+            return false;
+        }
+        if(root.value == targetSum && root.left == null && root.right == null) return true;
+        boolean left = hasPathSum(root.left, targetSum-root.value);
+        boolean right = hasPathSum(root.right, targetSum-root.value);
+        return left || right;
+    }
+    
+
     public static void main(String[] args) {
         binarySearchTree bst = new binarySearchTree();
 
@@ -1028,5 +1131,22 @@ public class binarySearchTree {
         int[] inOrder = {8, 9, 3, 15, 20,7};
         Node rootOfNewTree = bst.buildTree(preOrder, inOrder);
         bst.prettyDisplay(rootOfNewTree, 0);
+
+        System.out.println();
+        System.out.println(bst.Serialize());
+        System.out.println();
+        ArrayList<String> SerializedStringUsingArrayList = bst.Serialize();
+        Node n = bst.DeSerialize(SerializedStringUsingArrayList);
+        bst.prettyDisplay(n, 0);
+
+        System.out.println();
+        System.out.println(bst.SerializeString());
+
+        Node n2 = bst.DeSerializeString(bst.SerializeString());
+        bst.prettyDisplay(n2, 0);
+
+        System.out.println();
+        System.out.println(bst.hasPathSum(19));
+
     }
 }
