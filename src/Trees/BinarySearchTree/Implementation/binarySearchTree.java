@@ -1008,6 +1008,19 @@ public class binarySearchTree {
         return left || right;
     }
     
+    public int sumNumbers() {
+        return sumNumbers(root, "");
+    }
+    public int sumNumbers(Node root, String s){
+        if(root == null) return 0;
+        if(root.left == null && root.right == null){
+            return Integer.parseInt(s + String.valueOf(root.value));
+        }
+
+        int left = sumNumbers(root.left, s + String.valueOf(root.value));
+        int right = sumNumbers(root.right, s + String.valueOf(root.value));
+        return left + right;
+    }
 
     public static void main(String[] args) {
         binarySearchTree bst = new binarySearchTree();
@@ -1147,6 +1160,9 @@ public class binarySearchTree {
 
         System.out.println();
         System.out.println(bst.hasPathSum(19));
+
+        System.out.println();
+        System.out.println(bst.sumNumbers());
 
     }
 }
