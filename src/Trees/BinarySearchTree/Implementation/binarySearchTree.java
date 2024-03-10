@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.TreeMap;
@@ -1022,6 +1023,47 @@ public class binarySearchTree {
         return left + right;
     }
 
+    //QUESTION --> has path or not? (from root to leaf)
+    public boolean hasPath(int[] arr){
+        return hasPathHelper(root, arr, 0);
+    }
+    public boolean hasPathHelper(Node root, int[] arr, int index){
+        if(root == null) return false;
+        if(root.left == null && root.right == null && arr[index] == root.value) return true;
+        if(index >= arr.length || arr[index] != root.value) return false;
+        return hasPathHelper(root.left, arr, index+1) || hasPathHelper(root.right, arr ,index+1);
+    }
+
+    //QUESTION --> if has path Sum == targetSum, then return the path
+    public List<List<Integer>> pathSum(int targetSum) {
+        List<List<Integer>> result = new ArrayList<>();
+        pathSum(root, targetSum, result, "");
+        return result;
+    }
+    public void pathSum(Node root, int targetSum, List<List<Integer>> result, String s){
+        if(root == null) return;
+        if(root.left == null && root.right == null){
+            s += String.valueOf(root.value);
+            String[] arr = s.split(",");
+            
+            int sum = 0;
+            for(String i: arr){
+                sum += Integer.parseInt(i);
+            }
+
+            List<Integer> list = new ArrayList<>();
+            if(sum == targetSum){
+                for(String i: arr){
+                    list.add(Integer.parseInt(i));
+                }
+                result.add(list);
+            }
+        }
+
+        pathSum(root.left, targetSum, result, s +  String.valueOf(root.value) + ",");
+        pathSum(root.right, targetSum, result, s +  String.valueOf(root.value) + ",");
+    }
+
     public static void main(String[] args) {
         binarySearchTree bst = new binarySearchTree();
 
@@ -1163,6 +1205,13 @@ public class binarySearchTree {
 
         System.out.println();
         System.out.println(bst.sumNumbers());
+
+        int[] arr ={ 6 ,9, 8, 7};
+        System.out.println();
+        System.out.println(bst.hasPath(arr));
+
+        System.out.println();
+        System.out.println(bst.pathSum(18));
 
     }
 }
