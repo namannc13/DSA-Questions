@@ -8,9 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Stack;
 import java.util.TreeMap;
-
-import javax.swing.tree.TreeNode;
 
 public class binarySearchTree {
     // Node class
@@ -1009,6 +1008,24 @@ public class binarySearchTree {
         return left || right;
     }
     
+    //QUESTION --> Path Sum
+    public boolean hasPathSum2(int targetSum){
+        return hasPathSum2(root, targetSum);
+    }
+    public boolean hasPathSum2(Node root, int targetSum) {
+        if(root == null) return false;
+        return hasPathSum2Helper(root, targetSum);
+    }
+    public boolean hasPathSum2Helper(Node root, int targetSum){
+        if(root == null){
+            return false;
+        }
+        if(root.value == targetSum && root.left == null && root.right == null) return true;
+        boolean left = hasPathSum2(root.left, targetSum-root.value) || hasPathSum2(root.left, targetSum);
+        boolean right = hasPathSum2(root.right, targetSum-root.value)  || hasPathSum2(root.right, targetSum);
+        return left || right;
+    }
+    
     public int sumNumbers() {
         return sumNumbers(root, "");
     }
@@ -1034,7 +1051,7 @@ public class binarySearchTree {
         return hasPathHelper(root.left, arr, index+1) || hasPathHelper(root.right, arr ,index+1);
     }
 
-    //QUESTION --> if has path Sum == targetSum, then return the path
+    //QUESTION --> if has path Sum == targetSum, then return the path ( root to leaf only )
     public List<List<Integer>> pathSum(int targetSum) {
         List<List<Integer>> result = new ArrayList<>();
         pathSum(root, targetSum, result, "");
@@ -1064,6 +1081,99 @@ public class binarySearchTree {
         pathSum(root.right, targetSum, result, s +  String.valueOf(root.value) + ",");
     }
 
+    //QUESTION --> if has path Sum == targetSum, then return the path ( not root to leaf only )
+    public List<List<Integer>> pathSum2(int targetSum) {
+        List<List<Integer>> result = new ArrayList<>();
+        pathSum2(root, targetSum, result, "");
+        return result;
+    }
+    public void pathSum2(Node root, int targetSum, List<List<Integer>> result, String s){
+        if(root == null) return;
+        if(root.left == null && root.right == null){
+            s += String.valueOf(root.value);
+            String[] arr = s.split(",");
+            
+            int sum = 0;
+            for(String i: arr){
+                sum += Integer.parseInt(i);
+            }
+
+            List<Integer> list = new ArrayList<>();
+            if(sum == targetSum){
+                for(String i: arr){
+                    list.add(Integer.parseInt(i));
+                }
+                result.add(list);
+            }
+        }
+
+        pathSum2(root.left, targetSum, result, s +  String.valueOf(root.value) + ",");
+        pathSum2(root.left, targetSum, result, s);
+        pathSum2(root.right, targetSum, result, s +  String.valueOf(root.value) + ",");
+        pathSum2(root.right, targetSum, result, s);
+    }
+
+    //QUESTION --> if has path Sum == targetSum, then return the count of those paths ( not root to leaf only ) ( backtracking --> better time complexity )
+    int countPaths(Node node, int sum) {
+        List<Integer> path = new ArrayList<>();
+        return helper(node, sum, path);
+    }
+    int helper(Node node, int sum, List<Integer> path) {
+        if(node == null) {
+            return 0;
+        }
+
+        path.add(node.value);
+        int count = 0;
+        int s = 0;
+        for (int i = path.size() - 1; i >= 0; i--) {
+            s += path.get(i);
+            if (s == sum) {
+                count++;
+            }
+        }
+
+        count += helper(node.left, s, path) + helper(node.right, sum, path);
+
+        // backtrack
+        path.remove(path.size() - 1);
+        return count;
+    }
+
+    //QUESTION --> if has path Sum == targetSum, then return those paths ( not root to leaf only ) ( backtracking --> better time complexity )
+    List<List<Integer>> countPaths2(int sum) {
+        List<Integer> path = new ArrayList<>();
+        List<List<Integer>> paths = new ArrayList<>();
+        helper2(root,sum, path, paths);
+        return paths;
+    }
+    void helper2(Node node, int sum, List<Integer> path, List<List<Integer>> paths) {
+        if(node == null) {
+            return;
+        }
+
+        path.add(node.value);
+        int s = 0;
+        // how many paths I can make
+        List<Integer> list = new ArrayList<>();
+        for (int i = path.size() - 1; i >= 0; i--) {
+            s += path.get(i);
+            list.add(path.get(i));
+            if (s == sum) {
+                Collections.reverse(list);
+                paths.add(list);
+                break;
+            }
+        }
+
+        helper2(node.left, sum, path,paths);
+        helper2(node.right, sum, path, paths);
+
+        // backtrack
+        path.remove(path.size() - 1);
+        return;
+    }
+
     //QUESTION --> is same tree or not?
     public boolean isSameTree(Node p, Node q) {
         if(p == null && q != null) return false;
@@ -1084,6 +1194,29 @@ public class binarySearchTree {
             return ans || isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
         }
         return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+    }
+
+    // dfs using stack
+    void dfsStack(){
+        dfsStack(root);
+    }
+    void dfsStack(Node node) {
+        if(node == null) {
+            return;
+        }
+        Stack<Node> stack = new Stack<>();
+        stack.push(node);
+
+        while(!stack.isEmpty()) {
+            Node removed = stack.pop();
+            System.out.print(removed.value + " ");
+            if(removed.right != null) {
+                stack.push(removed.right);
+            }
+            if(removed.left != null) {
+                stack.push(removed.left);
+            }
+        }
     }
 
     
@@ -1224,7 +1357,10 @@ public class binarySearchTree {
         bst.prettyDisplay(n2, 0);
 
         System.out.println();
-        System.out.println(bst.hasPathSum(19));
+        System.out.println("pathSum exists?->" + bst.hasPathSum(18));
+
+        System.out.println();
+        System.out.println(bst.hasPathSum2(12));
 
         System.out.println();
         System.out.println(bst.sumNumbers());
@@ -1234,9 +1370,16 @@ public class binarySearchTree {
         System.out.println(bst.hasPath(arr));
 
         System.out.println();
-        System.out.println(bst.pathSum(18));
+        System.out.println("pathSum list->" + bst.pathSum(12));
 
-        
+        System.out.println();
+        System.out.println("pathSum2 list->" + bst.pathSum2(12));
+
+        System.out.println();
+        System.out.println(bst.countPaths2(12));
+
+        System.out.println();
+        bst.dfsStack();
 
     }
 }
