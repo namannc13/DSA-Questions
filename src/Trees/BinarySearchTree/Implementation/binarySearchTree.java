@@ -790,6 +790,7 @@ public class binarySearchTree {
     }
 
     //QUESTION --> Flatten a tree
+    @SuppressWarnings("unused")
     private void flatten(){
         flatten(root);
     }
@@ -1219,6 +1220,22 @@ public class binarySearchTree {
         }
     }
 
+    //QUESTION --> count good Nodes of Binary tree ( if the node is bigger than the above nodes in it's path , then it's a good node)
+    public int goodNodes() {
+        if(root == null) return 0;
+        return 1 + goodNodes(root.left, root.value) + goodNodes(root.right, root.value);
+    }
+    public int goodNodes(Node node, int maxval){
+        if(node == null) return 0;
+        int newmaxval = Math.max(node.value, maxval);
+        int num=0;
+        if(newmaxval == node.value){
+            num = 1;
+        }else{
+            num = 0;
+        }
+        return num + goodNodes(node.left, newmaxval) + goodNodes(node.right, newmaxval);
+    }
     
     public static void main(String[] args) {
         binarySearchTree bst = new binarySearchTree();
@@ -1380,6 +1397,9 @@ public class binarySearchTree {
 
         System.out.println();
         bst.dfsStack();
+
+        System.out.println();
+        System.out.println(bst.goodNodes());
 
     }
 }
