@@ -1064,6 +1064,29 @@ public class binarySearchTree {
         pathSum(root.right, targetSum, result, s +  String.valueOf(root.value) + ",");
     }
 
+    //QUESTION --> is same tree or not?
+    public boolean isSameTree(Node p, Node q) {
+        if(p == null && q != null) return false;
+        if(q == null && p != null) return false;
+        if(p == null && q == null) return true;
+        boolean ans = false;
+        if(p.value == q.value) ans = true;
+        return ans && isSameTree(p.left,q.left) && isSameTree(p.right, q.right);
+    }
+
+    //QUESTION --> is subRoot a subtree of root tree?
+    public boolean isSubtree(Node root, Node subRoot) {
+        if(root == null && subRoot == null) return true;
+        if(root != null && subRoot == null) return true;
+        if(root == null && subRoot != null) return false;
+        if(root.value == subRoot.value){
+            boolean ans = isSameTree(root, subRoot);
+            return ans || isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+        }
+        return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+    }
+
+    
     public static void main(String[] args) {
         binarySearchTree bst = new binarySearchTree();
 
@@ -1212,6 +1235,8 @@ public class binarySearchTree {
 
         System.out.println();
         System.out.println(bst.pathSum(18));
+
+        
 
     }
 }
