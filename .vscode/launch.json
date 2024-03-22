@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Subsets",
+            "request": "launch",
+            "mainClass": "Backtracking.Subsets",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
+            "name": "MergeSortUsingReturnTypeFunction",
+            "request": "launch",
+            "mainClass": "SortingAlgorithms.DivideAndConquer.MergeSort.MergeSortUsingReturnTypeFunction",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
+            "name": "climbingStairs",
+            "request": "launch",
+            "mainClass": "DP.Questions.climbingStairs",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
             "name": "populatingNextRightPointersInEachNode",
             "request": "launch",
             "mainClass": "Trees.BinarySearchTree.Ques.populatingNextRightPointersInEachNode",
