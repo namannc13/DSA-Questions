@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "combinationSum",
+            "request": "launch",
+            "mainClass": "Backtracking.combinationSum",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
             "name": "Subsets",
             "request": "launch",
             "mainClass": "Backtracking.Subsets",
