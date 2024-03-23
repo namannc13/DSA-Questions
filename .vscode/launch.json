@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "letterCombinations",
+            "request": "launch",
+            "mainClass": "Backtracking.letterCombinations",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
             "name": "Permutations",
             "request": "launch",
             "mainClass": "Backtracking.Permutations",
