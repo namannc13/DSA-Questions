@@ -6,6 +6,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "removenthNodeFromEnd",
+            "request": "launch",
+            "mainClass": "LinkedList.removenthNodeFromEnd",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
+            "name": "reorderList",
+            "request": "launch",
+            "mainClass": "LinkedList.reorderList",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
+            "name": "mergeTwoSortedList",
+            "request": "launch",
+            "mainClass": "LinkedList.mergeTwoSortedList",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
+            "name": "reverseList",
+            "request": "launch",
+            "mainClass": "LinkedList.reverseList",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
             "name": "letterCombinations",
             "request": "launch",
             "mainClass": "Backtracking.letterCombinations",
