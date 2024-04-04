@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "addTwoNumbers",
+            "request": "launch",
+            "mainClass": "LinkedList.addTwoNumbers",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
+            "name": "copyListWithRandomPointer",
+            "request": "launch",
+            "mainClass": "LinkedList.copyListWithRandomPointer",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
             "name": "removenthNodeFromEnd",
             "request": "launch",
             "mainClass": "LinkedList.removenthNodeFromEnd",
