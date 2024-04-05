@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "reverseListInKGroup",
+            "request": "launch",
+            "mainClass": "LinkedList.reverseListInKGroup",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
+            "name": "hasCycle",
+            "request": "launch",
+            "mainClass": "LinkedList.hasCycle",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
             "name": "addTwoNumbers",
             "request": "launch",
             "mainClass": "LinkedList.addTwoNumbers",
