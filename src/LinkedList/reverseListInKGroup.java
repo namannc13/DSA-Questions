@@ -52,6 +52,7 @@ public class reverseListInKGroup {
             }
             nextNode = kNode.next;
             kNode.next = null;
+            @SuppressWarnings("unused")
             ListNode ans = reverseList(temp);
             if(temp == head){
                 head = kNode;

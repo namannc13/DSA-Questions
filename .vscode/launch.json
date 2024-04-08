@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "lruCache",
+            "request": "launch",
+            "mainClass": "LinkedList.lruCache",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
+            "name": "mergeKSortedLinkedList",
+            "request": "launch",
+            "mainClass": "LinkedList.mergeKSortedLinkedList",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
             "name": "reverseListInKGroup",
             "request": "launch",
             "mainClass": "LinkedList.reverseListInKGroup",
