@@ -6,6 +6,41 @@
     "configurations": [
         {
             "type": "java",
+            "name": "topKFrequenctElements",
+            "request": "launch",
+            "mainClass": "Arrays.topKFrequenctElements",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
+            "name": "containsDuplicates",
+            "request": "launch",
+            "mainClass": "Arrays.containsDuplicates",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
+            "name": "isAnagram",
+            "request": "launch",
+            "mainClass": "Arrays.isAnagram",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
+            "name": "twoSum",
+            "request": "launch",
+            "mainClass": "Arrays.twoSum",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
+            "name": "productExceptSelf",
+            "request": "launch",
+            "mainClass": "Arrays.productExceptSelf",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
             "name": "lruCache",
             "request": "launch",
             "mainClass": "LinkedList.lruCache",
