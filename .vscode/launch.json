@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "longestConsecutiveElement",
+            "request": "launch",
+            "mainClass": "Arrays.longestConsecutiveElement",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
+            "name": "validSudoku",
+            "request": "launch",
+            "mainClass": "Arrays.validSudoku",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
             "name": "topKFrequenctElements",
             "request": "launch",
             "mainClass": "Arrays.topKFrequenctElements",
