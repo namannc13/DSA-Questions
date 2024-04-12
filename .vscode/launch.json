@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "groupAnagrams",
+            "request": "launch",
+            "mainClass": "Arrays.groupAnagrams",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
             "name": "longestConsecutiveElement",
             "request": "launch",
             "mainClass": "Arrays.longestConsecutiveElement",
