@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "permutationSequence",
+            "request": "launch",
+            "mainClass": "Recursion.permutationSequence",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
             "name": "groupAnagrams",
             "request": "launch",
             "mainClass": "Arrays.groupAnagrams",
