@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "generateParenthesis",
+            "request": "launch",
+            "mainClass": "Recursion.generateParenthesis",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
             "name": "permutationSequence",
             "request": "launch",
             "mainClass": "Recursion.permutationSequence",
