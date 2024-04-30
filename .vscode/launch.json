@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "allPossiblePaths",
+            "request": "launch",
+            "mainClass": "DP.Questions2D.GridQuestions.allPossiblePaths",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
             "name": "generateParenthesis",
             "request": "launch",
             "mainClass": "Recursion.generateParenthesis",
