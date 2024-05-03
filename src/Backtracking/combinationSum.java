@@ -14,24 +14,8 @@ public class combinationSum {
             ans.add(new ArrayList<>(res));
             return;
         }
-        if(i == 0){
-            if(target % candidates[i] == 0){
-                int count = target/candidates[i];
-                int count1 = count;
-                while(count !=0){
-                    res.add(candidates[i]);
-                    count--;
-                }
-                ans.add(new ArrayList<>(res));
-                while(count1 !=0){
-                    res.remove(res.size()-1);
-                    count1--;
-                }
-                return;
-            }
-            else{
-                return;
-            }
+        if(i < 0){
+            return;
         }
 
         combSum(candidates, target, i-1, ans, res);
@@ -40,7 +24,6 @@ public class combinationSum {
             combSum(candidates , target-candidates[i], i, ans, res);
             res.remove(res.size()-1);
         }
-        return;
     }
     public static void main(String[] args) {
         int[] arr = {2, 3, 6, 7};
