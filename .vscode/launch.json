@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "longestRepeatingCharReplacement",
+            "request": "launch",
+            "mainClass": "SlidingWindow.longestRepeatingCharReplacement",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
+            "name": "noOfSubstringsContainingAllThreeChar",
+            "request": "launch",
+            "mainClass": "SlidingWindow.noOfSubstringsContainingAllThreeChar",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
             "name": "allPossiblePaths",
             "request": "launch",
             "mainClass": "DP.Questions2D.GridQuestions.allPossiblePaths",

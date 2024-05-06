@@ -12,11 +12,11 @@ public class longestSubStringWithAtMostKDistinctCharacters {
                 hm.put(s.charAt(r), num+1);
             }else{
                 hm.put(s.charAt(r), 1);
-            }
+            }    
             if(hm.size() > k){
                 int num = hm.get(s.charAt(l));
                 if(num > 1){
-                    hm.put(s.charAt(l), num+1);
+                    hm.put(s.charAt(l), num-1);
                 }else{
                     hm.remove(s.charAt(l));
                 }
