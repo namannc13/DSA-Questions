@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "nextGreater",
+            "request": "launch",
+            "mainClass": "Stack.Questions.nextGreater",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
+            "name": "permutationInString",
+            "request": "launch",
+            "mainClass": "SlidingWindow.permutationInString",
+            "projectName": "DSA-Questions_63c504d9"
+        },
+        {
+            "type": "java",
             "name": "longestRepeatingCharReplacement",
             "request": "launch",
             "mainClass": "SlidingWindow.longestRepeatingCharReplacement",

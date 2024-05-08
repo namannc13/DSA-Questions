@@ -34,7 +34,7 @@ public class nextGreater {
             while(st.peek() != Integer.MAX_VALUE && arr[st.peek()] <= curr){
                 st.pop();
             }
-            ans[i] = (st.peek() == Integer.MAX_VALUE)? 0: st.peek() - i;
+            ans[i] = (st.peek() == Integer.MAX_VALUE)? -1: st.peek();
             st.push(i);
         }
 
